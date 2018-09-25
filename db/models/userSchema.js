@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
       Sunny: {type: String},
       Rainy: {type: String},
       Drizzle: {type: String},
-      Snowy: {type: String,},
+      Snowy: {type: String},
       Cloudy: {type: String},
       Thunderstorm: {type: String}
     }
