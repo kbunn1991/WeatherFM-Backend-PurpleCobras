@@ -10,7 +10,7 @@ router.use('/', passport.authenticate('jwt', { session: false, failWithError: tr
 //seed data password for user1 is password
 
 //get all playlists for one specific user
-router.get('/playlists', (req, res, next) => {
+router.get('/', (req, res, next) => {
   const userId = req.user.id;
   console.log(userId);
   return User.findById(userId)
@@ -23,24 +23,21 @@ router.get('/playlists', (req, res, next) => {
       res.status(500).json({message: 'Internal server error'}));
 });
 
-router.put('/playlists', (req, res, next) => {
+router.put('/', (req, res, next) => {
   const {weather} = req.body;
   const {artist, songTitle} = req.body;
+  const conct = artist + ', ' + songTitle;
+  console.log(weather);
+  console.log(conct, '---');
   const userId = req.user.id;
-  console.log(userId);
+  console.log(userId, '===');
   return User.findByIdAndUpdate(userId, 
     {
-      playlists: { 
-        weather : [{
-          $push : {
-            artist, songTitle
-          }
-        }]
-      }
+      playlists: {$push : { 'Sunny' :  conct }}
     }, {new: true})
     .then(result => {
       if(result){
-        res.sendStatus(200);
+        res.json(result);
       }
     })
     .catch(err => {
