@@ -16,9 +16,6 @@ const { router: usersRouter } = require('./users');
 const app = express();
 app.use(express.json());
 
-//auth
-passport.use(localStrategy);
-passport.use(jwtStrategy);
 
 //logger middleware
 app.use(
@@ -33,6 +30,10 @@ app.use(
     origin: CLIENT_ORIGIN
   })
 );
+
+//auth
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 //routers
 app.use('/api/users/', usersRouter);

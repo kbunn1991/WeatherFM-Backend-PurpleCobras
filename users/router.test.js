@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
 const {app} = require('../index');
-const {User} = require('./models');
+const {User} = require('..db/models/userSchema');
 const { TEST_DATABASE_URL } = require('../config');
 
 chai.use(chaiHttp);
