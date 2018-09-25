@@ -13,7 +13,7 @@ const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
 
 const app = express();
-app.unsubscribe(express.json());
+app.use(express.json());
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
