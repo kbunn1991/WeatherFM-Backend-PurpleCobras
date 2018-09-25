@@ -30,11 +30,11 @@ router.put('/', (req, res, next) => {
   console.log(weather);
   console.log(conct, '---');
   const userId = req.user.id;
+  const updateObj = {
+    playlists: {$push : { 'Sunny' :  conct }}
+  };
   console.log(userId, '===');
-  return User.findByIdAndUpdate(userId, 
-    {
-      playlists: {$push : { 'Sunny' :  conct }}
-    }, {new: true})
+  return User.findByIdAndUpdate(userId, updateObj, {new: true})
     .then(result => {
       if(result){
         res.json(result);
