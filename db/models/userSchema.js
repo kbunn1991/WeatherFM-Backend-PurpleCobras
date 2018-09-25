@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  name: {type: String, require: true},
+  firstName: {type: String, require: true},
   username: {type: String, require: true, unique: true},
   password: {type: String, require: true},
-  playlist: 
+  playlists: 
     {
-      Sunny: {type: String},
-      Rainy: {type: String},
-      Drizzle: {type: String},
-      Snowy: {type: String},
-      Cloudy: {type: String},
-      Thunderstorm: {type: String}
+      Sunny: [String],
+      Rainy: [String],
+      Drizzle: [String],
+      Snowy: [String],
+      Cloudy: [String],
+      Thunderstorm: [String]
     }
 });
 

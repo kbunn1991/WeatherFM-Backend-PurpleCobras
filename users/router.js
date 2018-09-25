@@ -119,7 +119,14 @@ router.post('/', jsonParser, (req, res) => {
         username,
         password: hash,
         firstName,
-        lastName
+        playlists: {
+            Sunny: [],
+            Rainy: [],
+            Drizzle: [],
+            Snowy: [],
+            Cloudy: [],
+            Thunderstorm: []
+        }
       });
     })
     .then(user => {
