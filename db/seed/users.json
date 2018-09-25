@@ -1,0 +1,100 @@
+[
+  {
+    "name": "User Prime",
+    "username": "user1",
+    "password": "$2a$10$XNDY.kdqYNr2MkfPLsHH9OUEPp11ZelZRc4CqkBQ1v12MYIVRT43C",
+    "progressHead": 0,
+    "progress": [
+      {
+        "wordId": "5b99573df421843cdcdcc135",
+        "untranslated": "わたし",
+        "phonetic": "watashi",
+        "translation": ["me", "I", "myself"],
+        "m": 1,
+        "next": 1
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc136",
+        "untranslated": "いち",
+        "phonetic": "ichi",
+        "translation": ["one"],
+        "m": 1,
+        "next": 2
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc137",
+        "untranslated": "に",
+        "phonetic": "ni",
+        "translation": ["two"],
+        "m": 1,
+        "next": 3
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc138",
+        "untranslated": "さん",
+        "phonetic": "san",
+        "translation": ["three"],
+        "m": 1,
+        "next": 4
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc139",
+        "untranslated": "よん",
+        "phonetic": "yon",
+        "translation": ["four"],
+        "m": 1,
+        "next": 0
+      }
+    ]
+
+  },
+  {
+    "name": "The Drifter",
+    "username": "hyperlight",
+    "password": "$2a$10$1QvnKqOcI4fh/hM0nCZM5ejO0QIxEVvDFskkbMd7bIP1Ugvj9Wis2",
+    "progressHead": 0,
+    "progress": [
+      {
+        "wordId": "5b99573df421843cdcdcc135",
+        "untranslated": "わたし",
+        "phonetic": "watashi",
+        "translation": ["me", "I", "myself"],
+        "m": 1,
+        "next": 1
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc136",
+        "untranslated": "いち",
+        "phonetic": "ichi",
+        "translation": ["one"],
+        "m": 1,
+        "next": 2
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc137",
+        "untranslated": "に",
+        "phonetic": "ni",
+        "translation": ["two"],
+        "m": 1,
+        "next": 3
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc138",
+        "untranslated": "さん",
+        "phonetic": "san",
+        "translation": ["three"],
+        "m": 1,
+        "next": 4
+      },
+      {
+        "wordId": "5b99573df421843cdcdcc139",
+        "untranslated": "よん",
+        "phonetic": "yon",
+        "translation": ["four"],
+        "m": 1,
+        "next": 0
+      }
+    ]
+
+  }
+]
