@@ -120,12 +120,12 @@ router.post('/', jsonParser, (req, res) => {
         password: hash,
         firstName,
         playlists: {
-            Sunny: [],
-            Rainy: [],
-            Drizzle: [],
-            Snowy: [],
-            Cloudy: [],
-            Thunderstorm: []
+          Sunny: [],
+          Rainy: [],
+          Drizzle: [],
+          Snowy: [],
+          Cloudy: [],
+          Thunderstorm: []
         }
       });
     })
