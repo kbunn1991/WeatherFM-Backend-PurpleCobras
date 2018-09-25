@@ -11,25 +11,33 @@ const { dbConnect } = require('./db-mongoose');
 
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
+const { router: usersRouter } = require('./users');
 
 const app = express();
 app.use(express.json());
 
+//auth
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+//logger middleware
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
     skip: (req, res) => process.env.NODE_ENV === 'test'
   })
 );
 
+//cross origin
 app.use(
   cors({
     origin: CLIENT_ORIGIN
   })
 );
 
+//routers
+app.use('/api/users/', usersRouter);
+
+//error handling
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
