@@ -7,12 +7,12 @@ const userSchema = new mongoose.Schema({
   password: {type: String, require: true},
   playlist: 
     {
-      Sunny: {type: String, required: true},
-      Rainy: {type: String, required: true},
-      Drizzle: {type: String, required: true},
-      Snowy: {type: String, required: true},
-      Cloudy: {type: String, required: true},
-      Thunderstorm: {type: String, required: true}
+      Sunny: {type: String},
+      Rainy: {type: String},
+      Drizzle: {type: String},
+      Snowy: {type: String,},
+      Cloudy: {type: String},
+      Thunderstorm: {type: String}
     }
 });
 
