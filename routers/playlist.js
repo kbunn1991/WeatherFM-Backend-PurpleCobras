@@ -23,4 +23,30 @@ router.get('/playlist', (req, res, next) => {
       res.status(500).json({message: 'Internal server error'}));
 });
 
+router.put('/playlist', (req, res, next) => {
+  const {weather} = req.body;
+  const {artist, songTitle} = req.body;
+  const userId = req.user.id;
+  console.log(userId);
+  return User.findByIdAndUpdate(userId, 
+    {
+      playlists: { 
+        $push : {
+          weather : 
+        [
+          artist, songTitle
+        ]
+        }
+      }
+    }, {new: true})
+    .then(result => {
+      if(result){
+        res.sendStatus(200);
+      }
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 module.exports = {router};
