@@ -1,6 +1,6 @@
 [
   {
-    "name": "Kevin",
+    "firstName": "Kevin",
     "username": "user1",
     "password": "$2a$10$H0oOE10WMdAKX6Rg1we1POwu9otwB.WtdWl0kPmHhNIEx8g9p6yU2",
     "playlists": {
@@ -41,7 +41,7 @@
     }
   },
   {
-    "name": "Kevin",
+    "firstName": "Kevin",
     "username": "user2",
     "password": "$2a$10$H0oOE10WMdAKX6Rg1we1POwu9otwB.WtdWl0kPmHhNIEx8g9p6yU2",
     "playlists": {
