@@ -2,8 +2,6 @@ const express = require('express');
 const fetch = require('node-fetch');
 const {WEATHER_API_KEY} = require('../config');
 
-const User = require('../db/models/userSchema');
-
 const router = express.Router();
 
 router.get('/:lat/:lng', (req, res, next) => {
@@ -15,8 +13,15 @@ router.get('/:lat/:lng', (req, res, next) => {
       'content-type' : 'application/json'
     }
   })
-    .then(res => res.json())
-    .then(json => console.log(json))
+    .then(result => {
+      result = result.json();
+      return result;
+    })
+    .then(result => {
+      console.log(result.weather[0].id);
+      
+      return res.json(result.weather[0].id);
+    })
     .catch(err => {
       next(err);
     });
