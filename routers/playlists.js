@@ -23,6 +23,7 @@ router.get('/', (req, res, next) => {
       res.status(500).json({message: 'Internal server error'}));
 });
 
+// add a song to a playlist
 router.put('/', (req, res, next) => {
   const {weather} = req.body;
   const {artist, songTitle, albumPng} = req.body;
