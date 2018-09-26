@@ -1,16 +1,17 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const {WEATHER_API_KEY} = require('../config');
+const { YOUTUBE_API_KEY } = require('../config');
 
 const router = express.Router();
 
-router.get('/:lat/:lng', (req, res, next) => {
-  const {lat, lng} = req.params;
-  console.log(lat, lng, WEATHER_API_KEY);
-  return fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&APPID=${WEATHER_API_KEY}`, {
+
+router.get('/:song', (req, res, next) => {
+  const song = req.params.song
+  // console.log(YOUTUBE_API_KEY)
+  return fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&q=${song}+lyrics&part=snippet&maxResults=1&type=video`, {
     method: 'GET',
     headers: {
-      'content-type' : 'application/json'
+      'content-type': 'application/json'
     }
   })
     .then(result => {
@@ -18,13 +19,15 @@ router.get('/:lat/:lng', (req, res, next) => {
       return result;
     })
     .then(result => {
-      console.log(result.weather[0].id);
-      
-      return res.json(result.weather[0].id);
+      let videoId = result.items[0].id.videoId;
+      let videoURL = 'https://www.youtube.com/watch?v=' + videoId
+      console.log(videoURL)
+      return res.json(videoURL);
     })
     .catch(err => {
       next(err);
     });
 });
 
-module.exports = {router};
+
+module.exports = { router };
