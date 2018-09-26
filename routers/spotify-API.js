@@ -40,8 +40,8 @@ router.get('/:weather', (req, res, next) => {
           if(response){
             response.tracks.map(item => {
               songArr.push({
-                track : item.name,
                 artist: item.artists[0].name,
+                songTitle : item.name,
                 thumbnail: item.album.images[0].url
               });
             });
