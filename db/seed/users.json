@@ -11,5 +11,18 @@
       "Cloudy": ["I 2 I, Tevin Campbell"],
       "Thunderstorm": ["I 2 I, Tevin Campbell"]
     }
+  },
+  {
+    "name": "Kevin",
+    "username": "user2",
+    "password": "$2a$10$H0oOE10WMdAKX6Rg1we1POwu9otwB.WtdWl0kPmHhNIEx8g9p6yU2",
+    "playlists": {
+      "Sunny": ["I 2 I, Tevin Campbell", "I 2 I, Tevin Campbell"],
+      "Rainy": ["I 2 I, Tevin Campbell"],
+      "Drizzle": ["I 2 I, Tevin Campbell"],
+      "Snowy": ["I 2 I, Tevin Campbell"],
+      "Cloudy": ["I 2 I, Tevin Campbell"],
+      "Thunderstorm": ["I 2 I, Tevin Campbell"]
+    }
   }
 ]
