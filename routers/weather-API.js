@@ -23,9 +23,10 @@ router.get('/:lat/:lng', (req, res, next) => {
       return result;
     })
     .then(result => {
-      console.log(result.weather[0].id);
+      // console.log(result.weather[0].id);
+      console.log('result ---', result);
       
-      return res.json(result.weather[0].id);
+      return res.json(result.weather[0].main);
     })
     .catch(err => {
       next(err);
