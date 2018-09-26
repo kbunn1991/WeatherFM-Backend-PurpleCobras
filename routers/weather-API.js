@@ -1,8 +1,13 @@
 const express = require('express');
 const fetch = require('node-fetch');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+
 const {WEATHER_API_KEY} = require('../config');
 
 const router = express.Router();
+
+router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/:lat/:lng', (req, res, next) => {
   const {lat, lng} = req.params;
