@@ -5,6 +5,8 @@ const {router: playlistsRouter} = require('./playlists');
 const {router: authRouter} = require('./auth');
 const {router: weatherRouter} = require('./weather-API');
 const {router: spotifyRouter} = require('./spotify-API');
+const {router: youtubeRouter} = require('./youtube-API');
+
 
 module.exports = {
   User, 
@@ -12,4 +14,6 @@ module.exports = {
   playlistsRouter, 
   authRouter, 
   weatherRouter,
-  spotifyRouter};
+  spotifyRouter,
+  youtubeRouter
+};
