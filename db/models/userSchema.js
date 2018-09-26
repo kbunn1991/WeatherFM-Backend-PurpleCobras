@@ -7,12 +7,36 @@ const userSchema = new mongoose.Schema({
   password: {type: String, require: true},
   playlists: 
     {
-      Sunny: [{type: String}],
-      Rainy: [String],
-      Drizzle: [String],
-      Snowy: [String],
-      Cloudy: [String],
-      Thunderstorm: [String]
+      Sunny: [{
+        artist: {type: String, required: true},
+        songTitle: {type: String, required: true},
+        albumPng: {type: String}
+      }],
+      Rainy: [{
+        artist: {type: String, required: true},
+        songTitle: {type: String, required: true},
+        albumPng: {type: String}
+      }],
+      Drizzle: [{
+        artist: {type: String, required: true},
+        songTitle: {type: String, required: true},
+        albumPng: {type: String}
+      }],
+      Snowy: [{
+        artist: {type: String, required: true},
+        songTitle: {type: String, required: true},
+        albumPng: {type: String}
+      }],
+      Cloudy: [{
+        artist: {type: String, required: true},
+        songTitle: {type: String, required: true},
+        albumPng: {type: String}
+      }],
+      Thunderstorm: [{
+        artist: {type: String, required: true},
+        songTitle: {type: String, required: true},
+        albumPng: {type: String}
+      }]
     }
 });
 

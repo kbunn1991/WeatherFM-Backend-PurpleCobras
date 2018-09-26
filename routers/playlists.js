@@ -25,31 +25,21 @@ router.get('/', (req, res, next) => {
 
 router.put('/', (req, res, next) => {
   const {weather} = req.body;
-  const {artist, songTitle} = req.body;
-  const conct = artist;
+  const {artist, songTitle, albumPng} = req.body;
+  const songObj = {artist, songTitle, albumPng};
   console.log(weather);
-  console.log(conct, '---');
+  // console.log(songObj, '---');
   const userId = req.user.id;
-  // const updateObj = {playlists: {$push: {[weather]: conct}}};
-  console.log(userId, '===');
+  // console.log(userId, '===');
   return User.findById(userId)
     .then(result => {
       console.log(result);
-      result.playlists[weather].push(conct);
+      if(result){
+        result.playlists[weather].push(songObj);
+      }
       result.save();
       res.json(result);
-
     })
-    // .then(result => {
-    //   if(result) res.json(result);
-    // })
-  // return User.findByIdAndUpdate(userId, updateObj, {new: true})
-    // .then(result => {
-    //   console.log(result);
-    //   if(result){
-    //     res.json(result);
-    //   }
-    // })
     .catch(err => {
       next(err);
     });
