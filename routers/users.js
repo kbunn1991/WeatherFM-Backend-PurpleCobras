@@ -12,7 +12,6 @@ const jsonParser = bodyParser.json();
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
-  console.log(req.body);
   
   if (missingField) {
     return res.status(422).json({
@@ -133,7 +132,6 @@ router.post('/', jsonParser, (req, res) => {
       return res.status(201).json(user);
     })
     .catch(err => {
-      console.log(err);
       // Forward validation errors on to the client, otherwise give a 500
       // error because something unexpected has happened
       if (err.reason === 'ValidationError') {

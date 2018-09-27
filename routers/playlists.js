@@ -31,7 +31,7 @@ router.put('/', (req, res, next) => {
   // console.log(userId, '===');
   return User.findById(userId)
     .then(result => {
-      console.log(result);
+      // console.log(result);
       if(result){
         result.playlists[weather].push(songObj);
       }
@@ -48,16 +48,16 @@ router.delete('/', (req, res, next) => {
   const {weather} = req.body;
   const {artist, songTitle, albumPng} = req.body;
   const songObj = {artist, songTitle, albumPng};
-  console.log(weather);
+  // console.log(weather);
   // console.log(songObj, '---');
   const userId = req.user.id;
   return User.findById(userId)
     .then(result => {
       if(result){
         let newResults = result.playlists[weather].filter(song => song.songTitle !== songObj.songTitle);
-        console.log(newResults);
+        // console.log(newResults)
         result.playlists[weather] = newResults;
-        console.log(result);
+        // console.log(result)
       }
       result.save();
       res.json(result);
