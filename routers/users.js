@@ -119,9 +119,87 @@ router.post('/', jsonParser, (req, res) => {
         password: hash,
         firstName,
         playlists: {
-          Sunny: [ ],
-          Rainy: [],
-          Drizzle: [],
+          Sunny: [
+            {
+              artist: 'Bill Withers',
+              songTitle: 'Lovely Day',
+              thumbnail: 'https://i.scdn.co/image/c8977ed4a277af7cad24a7d3944867dc502d0ded',
+            },
+            {
+              artist: 'The Temper Trap',
+              songTitle: 'Sweet Disposition',
+              thumbnail: 'https://i.scdn.co/image/db7c8bb866f7ac10f60deb01ec23079627633092',
+            },
+            {
+              artist: 'Logic',
+              songTitle: 'Ballin',
+              thumbnail: 'https://i.scdn.co/image/1b776e10861ecf8910b6cf9b8d8eed3d07b21b1d',
+            },
+            {
+              artist: 'Washed Out',
+              songTitle: 'It All Feels Right',
+              thumbnail: 'https://i.scdn.co/image/7b878d124b070b09af63b7f1c7ac8b0397d81984',
+            },
+            {
+              artist: 'Grateful Dead',
+              songTitle: 'Franklin\'s Tower - 2006 Remastered Version',
+              thumbnail: 'https://i.scdn.co/image/9dc927f2916a646fd8201189173cc41adead286f',
+            }
+          ],
+          Rainy: [
+            {
+              artist: 'Other Lives',
+              songTitle: 'Black Tables',
+              thumbnail: 'https://i.scdn.co/image/e7f2d0de29ae90afd6d9e85ecb76e985f273e7c0',
+            },
+            {
+              artist: 'Whisperer',
+              songTitle: 'Currents',
+              thumbnail: 'https://i.scdn.co/image/b542fbd174e57c0a47c09ae54328d28061839422',
+            },
+            {
+              artist: 'Lauv',
+              songTitle: 'Paris in the Rain',
+              thumbnail: 'https://i.scdn.co/image/2302c853ddab4bda9aa9cb89d5012d26ed67bffc',
+            },
+            {
+              artist: 'FVHM',
+              songTitle: 'Cutting Ties - FVHM Remix',
+              thumbnail: 'https://i.scdn.co/image/38c46cd0a069d22142bb1a1ec63ea50c74361d55',
+            },
+            {
+              artist: 'The Olympians',
+              songTitle: 'Sirens of Jupiter',
+              thumbnail: 'https://i.scdn.co/image/94660be6fd94f77011fa91de6d2f770130a48166',
+            }
+          ],
+          Drizzle: [
+            {
+              artist: 'Young the Giant',
+              songTitle: 'Firelight',
+              thumbnail: 'https://i.scdn.co/image/91a92892cfeefad2159ddf831a0d868157a487c4',
+            },
+            {
+              artist: 'Keaton Henson',
+              songTitle: 'Petrichor',
+              thumbnail: 'https://i.scdn.co/image/727ffeeec9b246ff9cbbfb48f445c4dbe03333b1',
+            },
+            {
+              artist: 'Claude Debussy',
+              songTitle: 'Clair de Lune, L. 32',
+              thumbnail: 'https://i.scdn.co/image/b5e5b27c53dcbbb51d6ff7771f37d5b7d4e84237',
+            },
+            {
+              artist: 'Janelle Monáe',
+              songTitle: 'Neon Valley Street',
+              thumbnail: 'https://i.scdn.co/image/15ffdac00dfe71e920a7f6d7bf784dc0f038f8e9',
+            },
+            {
+              artist: 'The Allman Brothers Band',
+              songTitle: 'Stormy Monday - Live At The Fillmore East/1971',
+              thumbnail: 'https://i.scdn.co/image/0e811101c144c664973d157aa7b935aa3acab132',
+            }
+          ],
           Snowy: [],
           Cloudy: [],
           Thunderstorm: []
