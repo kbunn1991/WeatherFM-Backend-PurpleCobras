@@ -18,7 +18,7 @@ const expect = chai.expect;
 let token;
 let user;
 
-describe('WeatherFM API - youtube API', function () {
+describe('WeatherFM API - spotify API', function () {
     before(function () {
         return mongoose.connect(TEST_DATABASE_URL)
             .then(() => mongoose.connection.db.dropDatabase());
@@ -39,20 +39,17 @@ describe('WeatherFM API - youtube API', function () {
         return mongoose.disconnect();
     });
 
-    describe('GET /api/users/youtube/:song', function () {
-        //think theres some issue with the code on backend because its returning the
-        //entire user instead of just the youtube url
-
-
-        it('should return a valid youtube url', function () {
-            const song = "prince+purple+rain";
-            return Promise.all([
-                chai.request(app).get(`/api/users/youtube/${song}`).set('Authorization', `Bearer ${token}`)
-            ])
-                .then(([res]) => {
+    describe('GET /api/users/rec/:weather', function () {
+        it('should return a list of songs from spotify', function () {
+            const weather = "Rainy";
+            return chai.request(app).get(`/api/users/rec/${weather}`).set('Authorization', `Bearer ${token}`)
+                .then((res) => {
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
-                    expect(res.body).to.be.a('string');
+                    expect(res.body).to.be.a('array');
+                    res.body.forEach(song => {
+                        expect(song).to.have.keys('artist', 'songTitle', 'thumbnail')
+                    });
                 });
         });
     });
