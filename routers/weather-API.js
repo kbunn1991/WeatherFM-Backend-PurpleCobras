@@ -7,13 +7,17 @@ const {WEATHER_API_KEY} = require('../config');
 
 const router = express.Router();
 
-//api/users/weather
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
+router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
+//api/users/weather
+
+//get weather endpoint for openweathermap.com provided lat and lng
 router.get('/:lat/:lng', (req, res, next) => {
   const {lat, lng} = req.params;
+  const weatherUrl = 'http://api.openweathermap.org/data/2.5/weather'+
+  `?lat=${lat}&lon=${lng}&APPID=${WEATHER_API_KEY}`;
   console.log(lat, lng, WEATHER_API_KEY);
-  return fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&APPID=${WEATHER_API_KEY}`, {
+  return fetch(weatherUrl, {
     method: 'GET',
     headers: {
       'content-type' : 'application/json'
@@ -27,6 +31,7 @@ router.get('/:lat/:lng', (req, res, next) => {
       const weatherId = result.weather[0].id;
       // console.log(result.weather);
       // console.log('--->', weatherId, typeof weatherId);
+      //returns a String
       if(weatherId === 800){
         return res.json('Sunny');
       } else if(weatherId >= 200 && weatherId <= 232){

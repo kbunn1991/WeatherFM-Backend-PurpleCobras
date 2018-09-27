@@ -9,8 +9,10 @@ router.use('/', passport.authenticate('jwt', { session: false, failWithError: tr
 
 router.get('/:song', (req, res, next) => {
   const song = req.params.song;
+  const youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
+  `?key=${YOUTUBE_API_KEY}&q=${song}+lyrics&part=snippet&maxResults=1&type=video`;
   // console.log(YOUTUBE_API_KEY)
-  return fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&q=${song}+lyrics&part=snippet&maxResults=1&type=video`, {
+  return fetch(youtubeUrl, {
     method: 'GET',
     headers: {
       'content-type': 'application/json'

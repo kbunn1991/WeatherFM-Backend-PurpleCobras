@@ -4,8 +4,7 @@ const {SPOTIFY_KEY_64} = require('../config');
 const router = express.Router();
 
 //endpoint is /api/users/rec/:weather
-//WEATHER NOT YET IMPLEMENTED
-
+//get endpoint for random retrieval of spotify titles based on weather
 router.get('/:weather', (req, res, next) => {
   const {weather} = req.params;
   console.log(weather);
