@@ -55,9 +55,9 @@ router.delete('/', (req, res, next) => {
     .then(result => {
       if(result){
         let newResults = result.playlists[weather].filter(song => song.songTitle !== songObj.songTitle);
-        console.log(newResults)
+        console.log(newResults);
         result.playlists[weather] = newResults;
-        console.log(result)
+        console.log(result);
       }
       result.save();
       res.json(result);

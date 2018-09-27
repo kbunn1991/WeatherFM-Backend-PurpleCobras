@@ -7,36 +7,36 @@
       "Sunny": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         },  {
           "artist": "Tevin",
             "songTitle": "I 2 I",
-            "albumPng": "google.com"
+            "thumbnail": "google.com"
           }],
       "Rainy": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Drizzle": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Snowy": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Cloudy": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Thunderstorm": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }]
     }
   },
@@ -48,36 +48,36 @@
       "Sunny": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         },  {
           "artist": "Tevin",
             "songTitle": "I 2 I",
-            "albumPng": "google.com"
+            "thumbnail": "google.com"
           }],
       "Rainy": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Drizzle": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Snowy": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Cloudy": [ {
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }],
       "Thunderstorm":  [{
         "artist": "Tevin",
           "songTitle": "I 2 I",
-          "albumPng": "google.com"
+          "thumbnail": "google.com"
         }]
     }
   }
