@@ -25,7 +25,7 @@ router.get('/:song', (req, res, next) => {
     .then(result => {
       let videoId = result.items[0].id.videoId;
       let videoURL = 'https://www.youtube.com/watch?v=' + videoId;
-      console.log(videoURL);
+      // console.log(videoURL);
       return res.json(videoURL);
     })
     .catch(err => {
