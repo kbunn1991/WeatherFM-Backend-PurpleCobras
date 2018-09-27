@@ -23,8 +23,8 @@ router.get('/', (req, res, next) => {
 //-------- add a song to a playlist
 router.put('/', (req, res, next) => {
   const {weather} = req.body;
-  const {artist, songTitle, albumPng} = req.body;
-  const songObj = {artist, songTitle, albumPng};
+  const {artist, songTitle, thumbnail} = req.body;
+  const songObj = {artist, songTitle, thumbnail};
   // console.log(weather);
   // console.log(songObj, '---');
   const userId = req.user.id;
@@ -55,8 +55,8 @@ router.put('/', (req, res, next) => {
 //--------remove a song from a playlist
 router.delete('/', (req, res, next) => {
   const {weather} = req.body;
-  const {artist, songTitle, albumPng} = req.body;
-  const songObj = {artist, songTitle, albumPng};
+  const {artist, songTitle, thumbnail} = req.body;
+  const songObj = {artist, songTitle, thumbnail};
   // console.log(weather);
   // console.log(songObj, '---');
   const userId = req.user.id;
