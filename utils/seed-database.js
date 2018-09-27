@@ -15,7 +15,7 @@ mongoose.connect(DATABASE_URL)
     ]);
   })
   .then(results =>{
-    console.info('Init db with Words, Users');
+    console.info('Init db with Users');
   })
   .then(() => mongoose.disconnect())
   .catch(err =>{

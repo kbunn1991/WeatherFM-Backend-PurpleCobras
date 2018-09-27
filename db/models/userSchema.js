@@ -10,32 +10,32 @@ const userSchema = new mongoose.Schema({
       Sunny: [{
         artist: {type: String, required: true},
         songTitle: {type: String, required: true},
-        albumPng: {type: String}
+        thumbnail: {type: String}
       }],
       Rainy: [{
         artist: {type: String, required: true},
         songTitle: {type: String, required: true},
-        albumPng: {type: String}
+        thumbnail: {type: String}
       }],
       Drizzle: [{
         artist: {type: String, required: true},
         songTitle: {type: String, required: true},
-        albumPng: {type: String}
+        thumbnail: {type: String}
       }],
       Snowy: [{
         artist: {type: String, required: true},
         songTitle: {type: String, required: true},
-        albumPng: {type: String}
+        thumbnail: {type: String}
       }],
       Cloudy: [{
         artist: {type: String, required: true},
         songTitle: {type: String, required: true},
-        albumPng: {type: String}
+        thumbnail: {type: String}
       }],
       Thunderstorm: [{
         artist: {type: String, required: true},
         songTitle: {type: String, required: true},
-        albumPng: {type: String}
+        thumbnail: {type: String}
       }]
     }
 });
