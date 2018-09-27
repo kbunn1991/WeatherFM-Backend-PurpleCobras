@@ -200,9 +200,88 @@ router.post('/', jsonParser, (req, res) => {
               thumbnail: 'https://i.scdn.co/image/0e811101c144c664973d157aa7b935aa3acab132',
             }
           ],
-          Snowy: [],
-          Cloudy: [],
-          Thunderstorm: []
+         
+          Snowy: [
+            {
+              artist: 'Ella Fitzgerald',
+              songTitle: 'Baby Its Cold Outside',
+              thumbnail: 'https://i.scdn.co/image/f78e02b431565892fe10fa33a5dce0dfe49426c4'
+            },
+            {
+              artist: 'Gyvus',
+              songTitle: 'Tozen',
+              thumbnail: 'https://i.scdn.co/image/6edb99796a0ba9f51f8b9c18969bf7cf547a6a59'
+            },
+            {
+              artist: 'The Neighbourhood',
+              songTitle: 'Sweater Weather',
+              thumbnail: 'https://i.scdn.co/image/ff91ad86bcd7fe6825c1b82fe74a7db4a8dd4b97'
+            },
+            {
+              artist: 'Art Pepper',
+              songTitle: 'You Go To My Head',
+              thumbnail: 'https://i.scdn.co/image/ac967ca6ac2782405a8832a710430967424d44e3'
+            },
+            {
+              artist: 'The Doors',
+              songTitle: 'Riders On The Storm',
+              thumbnail: 'https://i.scdn.co/image/387d03c05bb0d7a201553de7e66b09600a69d2f8'
+            }
+          ],
+          Cloudy: [
+            {
+              artist: 'Macklemore & Ryan Lewis',
+              songTitle: 'Thin Line',
+              thumbnail: 'https://i.scdn.co/image/410191f75b2d2d48adb5a5d80d2acd09f811ff47'
+            },
+            {
+              artist: 'Sickick',
+              songTitle: 'Mind Games',
+              thumbnail: 'https://i.scdn.co/image/4051cd9fb90462627f6be1a0ea1360014290ef86'
+            },
+            {
+              artist: 'Vivaldi',
+              songTitle: 'The Seasons’ Four Concertos, Op.8, Winter, in F Minor , Part 1',
+              thumbnail: 'https://i.scdn.co/image/b0b4d45e55e0fea75ae14f1958ce548a0731a439'
+            },
+            {
+              artist: 'Wiz Khalifa',
+              songTitle: 'Mezmorized',
+              thumbnail: 'https://i.scdn.co/image/3409c1ad9636eda6f75c38f4a261a4ddf25ac6f1'
+            },
+            {
+              artist: 'Emancipator',
+              songTitle: 'Greenland',
+              thumbnail: 'https://i.scdn.co/image/928cbfcec230a5f09f2d2a7d96916c89b293d70c'
+            }
+          ],
+          Thunderstorm: [ 
+            {
+              artist: 'Cage The Elephant',
+              songTitle: 'Shake Me Down',
+              thumbnail: 'https://i.scdn.co/image/5959b928589064dd7af767ad4d4c87da57a9d6cc'
+            },
+            {
+              artist: 'OneRepublic',
+              songTitle: 'Lets Hurt Tonight',
+              thumbnail: 'https://i.scdn.co/image/3af30ea172ff0db16edfcbcc7b2256896f365460'
+            },
+            {
+              artist: 'Joyner Lucas',
+              songTitle: 'Im Not Racist',
+              thumbnail: 'https://i.scdn.co/image/155b9f5d48112b13ac04c1024750c4c968898a32'
+            },
+            {
+              artist: 'Modern Rock Heroes',
+              songTitle: 'Monsoon',
+              thumbnail: 'https://i.scdn.co/image/5e232e9475674da1aa65b00ef856065d8d78acf0'
+            },
+            {
+              artist: 'Santana',
+              songTitle: 'Soul Sacrifice',
+              thumbnail: 'https://i.scdn.co/image/686c62d028075763b76e32235d1834fc8fa4ef1b'
+            }
+          ]
         }
       });
     })
