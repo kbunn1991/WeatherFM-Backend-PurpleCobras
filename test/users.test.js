@@ -4,14 +4,14 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
-const {app} = require('../index');
-const {User} = require('..db/models/userSchema');
+const app = require('../server');
+const User = require('../db/models/userSchema');
 const { TEST_DATABASE_URL } = require('../config');
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-describe('Cocktail API - Users', function () {
+describe('WeatherFM API - Users', function () {
     const username = 'exampleUser';
     const password = 'examplePass';
     const firstName = 'Example';
@@ -42,7 +42,7 @@ describe('Cocktail API - Users', function () {
                     .send({
                         password,
                         firstName,
-                        lastName
+                        // lastName
                     })
                     .then((res) => {
                         expect(res).to.have.status(422);
@@ -56,7 +56,7 @@ describe('Cocktail API - Users', function () {
                     .send({
                         username,
                         firstName,
-                        lastName
+                        // lastName
                     })
                     .then((res) => {
                         expect(res).to.have.status(422);
@@ -71,7 +71,7 @@ describe('Cocktail API - Users', function () {
                         username: 1234,
                         password,
                         firstName,
-                        lastName
+                        // lastName
                     })
                     .then((res) => {
                         expect(res).to.have.status(422);
@@ -88,7 +88,7 @@ describe('Cocktail API - Users', function () {
                         username,
                         password: 1234,
                         firstName,
-                        lastName
+                        // lastName
                     })
                     .then((res) => {
                         expect(res).to.have.status(422);
@@ -105,7 +105,7 @@ describe('Cocktail API - Users', function () {
                         username: ` ${username} `,
                         password,
                         firstName,
-                        lastName
+                        // lastName
                     })
                     .then((res) => {
                         expect(res).to.have.status(422);
@@ -122,7 +122,7 @@ describe('Cocktail API - Users', function () {
                         username,
                         password: ` ${password} `,
                         firstName,
-                        lastName
+                        // lastName
                     })
                     .then((res) => {
                         expect(res).to.have.status(422);
@@ -214,7 +214,6 @@ describe('Cocktail API - Users', function () {
                         username,
                         password,
                         firstName,
-                        lastName
                     })
                     .then(res => {
                         expect(res).to.have.status(201);
@@ -222,11 +221,13 @@ describe('Cocktail API - Users', function () {
                         expect(res.body).to.have.keys(
                             'username',
                             'firstName',
-                            'lastName'
+                            'createdAt',
+                            'updatedAt',
+                            'id',
+                            'playlists'
                         );
                         expect(res.body.username).to.equal(username);
                         expect(res.body.firstName).to.equal(firstName);
-                        expect(res.body.lastName).to.equal(lastName)
                         return User.findOne({
                             username
                         });
@@ -256,7 +257,10 @@ describe('Cocktail API - Users', function () {
                         expect(res.body).to.have.keys(
                             'username',
                             'firstName',
-                            'lastName',
+                            'createdAt',
+                            'updatedAt',
+                            'playlists',
+                            'id'
                         );
                         expect(res.body.username).to.equal(username);
                         expect(res.body.firstName).to.equal(firstName);
@@ -267,35 +271,6 @@ describe('Cocktail API - Users', function () {
                     .then(user => {
                         expect(user).to.not.be.null;
                         expect(user.firstName).to.equal(firstName);
-                    });
-            });
-            it('Should trim lastName', function () {
-                return chai
-                    .request(app)
-                    .post('/api/users')
-                    .send({
-                        username,
-                        password,
-                        lastName: ` ${lastName} `,
-                        firstName
-                    })
-                    .then(res => {
-                        expect(res).to.have.status(201);
-                        expect(res.body).to.be.an('object');
-                        expect(res.body).to.have.keys(
-                            'username',
-                            'lastName',
-                            'firstName'
-                        );
-                        expect(res.body.username).to.equal(username);
-                        expect(res.body.lastName).to.equal(lastName);
-                        return User.findOne({
-                            username
-                        });
-                    })
-                    .then(user => {
-                        expect(user).to.not.be.null;
-                        expect(user.lastName).to.equal(lastName);
                     });
             });
         });

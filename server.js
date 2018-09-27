@@ -43,8 +43,7 @@ passport.use(jwtStrategy);
 //routers
 app.use('/api/users/', usersRouter);
 app.use('/api/users/playlists', playlistsRouter);
-app.use('/api/auth/', authRouter);
-
+app.use('/api/auth/', authRouter)
 app.use('/api/users/weather', weatherRouter);
 app.use('/api/users/rec', spotifyRouter);
 app.use('/api/users/youtube', youtubeRouter);
