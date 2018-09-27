@@ -60,7 +60,7 @@ router.get('/:weather', (req, res, next) => {
   }
   console.log(filippId, kevinId, kaitId, brandonId, ianId);
   const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='
-  +`${filippId},${kaitId},${kevinId},${brandonId},${ianId}&min_popularity=50&limit=5`;
+  +`${filippId},${kaitId},${kevinId},${brandonId},${ianId}&min_popularity=50&limit=20`;
   
   // https://api.spotify.com/v1/recommendations?seed_tracks=\
   // 5uCax9HTNlzGybIStD3vDh,7795WJLVKJoAyVoOtCWqXN,69vToJ9BMbbLlFZo7k7A7B,1ab41ytPRTZ6fy8DjHCV2z,44T13PWJ87jb3lFElhVIHx&\
