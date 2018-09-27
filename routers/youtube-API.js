@@ -8,6 +8,7 @@ const router = express.Router();
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/:song', (req, res, next) => {
+  console.log("hitting correct endpoint")
   const song = req.params.song;
   const youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
   `?key=${YOUTUBE_API_KEY}&q=${song}+lyrics&part=snippet&maxResults=1&type=video`;
@@ -25,7 +26,7 @@ router.get('/:song', (req, res, next) => {
     .then(result => {
       let videoId = result.items[0].id.videoId;
       let videoURL = 'https://www.youtube.com/watch?v=' + videoId;
-      console.log(videoURL);
+      // console.log(videoURL);
       return res.json(videoURL);
     })
     .catch(err => {
