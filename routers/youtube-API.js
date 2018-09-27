@@ -1,9 +1,11 @@
 const express = require('express');
 const fetch = require('node-fetch');
+const passport = require('passport');
 const { YOUTUBE_API_KEY } = require('../config');
 
 const router = express.Router();
 
+router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/:song', (req, res, next) => {
   const song = req.params.song
