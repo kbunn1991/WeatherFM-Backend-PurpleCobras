@@ -200,7 +200,6 @@ router.post('/', jsonParser, (req, res) => {
               thumbnail: 'https://i.scdn.co/image/0e811101c144c664973d157aa7b935aa3acab132',
             }
           ],
-         
           Snowy: [
             {
               artist: 'Ella Fitzgerald',
