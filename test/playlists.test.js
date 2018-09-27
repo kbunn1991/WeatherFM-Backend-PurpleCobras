@@ -104,17 +104,12 @@ describe('WeatherFM API - Playlists', function () {
 
         // it('should return an error when missing "name" field', function () {
         //   const updateItem = {};
-        //   let data;
-        //   return Folder.findOne({ userId: user.id })
-        //     .then(_data => {
-        //       data = _data;
-        //       return chai.request(app).put(`/api/folders/${data.id}`).set('Authorization', `Bearer ${token}`).send(updateItem);
-        //     })
+        //   return chai.request(app).put(`/api/users/playlists`).set('Authorization', `Bearer ${token}`).send(updateItem)
         //     .then(res => {
-        //       expect(res).to.have.status(400);
+        //       expect(res).to.have.status(422);
         //       expect(res).to.be.json;
         //       expect(res.body).to.be.a('object');
-        //       expect(res.body.message).to.equal('Missing `name` in request body');
+        //       expect(res.body.message).to.equal('Missing weather or song info in request body');
         //     });
         // });
 
@@ -153,7 +148,5 @@ describe('WeatherFM API - Playlists', function () {
                     expect(res.body.playlists.Sunny.length).to.not.eql(data.playlists.Sunny.length);
                 })
         });
-
     });
-
 });

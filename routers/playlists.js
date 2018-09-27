@@ -29,6 +29,15 @@ router.put('/', (req, res, next) => {
   // console.log(songObj, '---');
   const userId = req.user.id;
   // console.log(userId, '===');
+
+  // if (!weather || !artist || !songTitle) {
+  //   return res.status(422).json({
+  //     code: 422,
+  //     reason: 'ValidationError',
+  //     message: `Missing weather or song info in request body`,
+  //   });
+  // }
+
   return User.findById(userId)
     .then(result => {
       // console.log(result);
