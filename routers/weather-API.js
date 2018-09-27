@@ -7,6 +7,7 @@ const {WEATHER_API_KEY} = require('../config');
 
 const router = express.Router();
 
+//api/users/weather
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/:lat/:lng', (req, res, next) => {
@@ -23,10 +24,24 @@ router.get('/:lat/:lng', (req, res, next) => {
       return result;
     })
     .then(result => {
-      // console.log(result.weather[0].id);
-      console.log('result ---', result);
-      
-      return res.json(result.weather[0].main);
+      const weatherId = result.weather[0].id;
+      // console.log(result.weather);
+      // console.log('--->', weatherId, typeof weatherId);
+      if(weatherId === 800){
+        return res.json('Sunny');
+      } else if(weatherId >= 200 && weatherId <= 232){
+        return res.json('Thunderstorm');
+      } else if(weatherId >= 300 && weatherId <= 321){
+        return res.json('Drizzle');
+      } else if(weatherId >= 500 && weatherId <= 531){
+        return res.json('Rain');
+      } else if(weatherId >= 600 && weatherId <= 622){
+        return res.json('Snow');
+      } else if(weatherId >= 701 && weatherId <= 781){
+        return res.json('Cloudy');
+      } else if(weatherId >= 800 && weatherId <= 804){
+        return res.json('Cloudy');
+      }
     })
     .catch(err => {
       next(err);
