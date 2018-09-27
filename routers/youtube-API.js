@@ -7,10 +7,12 @@ const router = express.Router();
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
-router.get('/:song', (req, res, next) => {
-  const song = req.params.song;
+router.get('/:artist/:songTitle', (req, res, next) => {
+  let artist = req.params.artist;
+  let songTitle = req.params.songTitle;
+  
   const youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
-  `?key=${YOUTUBE_API_KEY}&q=${song}+lyrics&part=snippet&maxResults=1&type=video`;
+  `?key=${YOUTUBE_API_KEY}&q=${artist}+${songTitle}+lyrics&part=snippet&maxResults=1&type=video`;
   // console.log(YOUTUBE_API_KEY)
   return fetch(youtubeUrl, {
     method: 'GET',
