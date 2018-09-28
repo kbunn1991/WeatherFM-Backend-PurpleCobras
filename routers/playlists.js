@@ -53,17 +53,15 @@ router.put('/', (req, res, next) => {
 });
 
 //--------remove a song from a playlist
-router.delete('/', (req, res, next) => {
-  const {weather} = req.body;
-  const {artist, songTitle, thumbnail} = req.body;
-  const songObj = {artist, songTitle, thumbnail};
+router.delete('/:weather/:songTitle', (req, res, next) => {
+  const {weather, songTitle} = req.params;
   // console.log(weather);
-  // console.log(songObj, '---');
   const userId = req.user.id;
   return User.findById(userId)
     .then(result => {
       if(result){
-        let newResults = result.playlists[weather].filter(song => song.songTitle !== songObj.songTitle);
+        let newResults = result.playlists[weather]
+          .filter(song => song.songTitle !== songTitle);
         // console.log(newResults)
         result.playlists[weather] = newResults;
         // console.log(result)
