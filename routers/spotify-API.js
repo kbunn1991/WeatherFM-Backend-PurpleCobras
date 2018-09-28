@@ -7,7 +7,7 @@ const router = express.Router();
 //get endpoint for random retrieval of spotify titles based on weather
 router.get('/:weather', (req, res, next) => {
   const {weather} = req.params;
-  console.log(weather);
+  // console.log(weather);
   let filippId = '';
   let kaitId = '';
   let kevinId = '';
@@ -80,8 +80,10 @@ router.get('/:weather', (req, res, next) => {
     break;
   }
   //console.log(filippId, kevinId, kaitId, brandonId, ianId);
-  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='
-  +`${filippId},${kaitId},${kevinId},${brandonId},${ianId}&min_popularity=20&limit=100&target_danceability=${danceability}&target_energy=${energy}&target_valence=${valence}`;
+  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='+
+  `${filippId},${kaitId},${kevinId},${brandonId},${ianId}`+
+  `&min_popularity=20&limit=100&target_danceability=${danceability}`+
+  `&target_energy=${energy}&target_valence=${valence}`;
   
   // https://api.spotify.com/v1/recommendations?seed_tracks=\
   // 5uCax9HTNlzGybIStD3vDh,7795WJLVKJoAyVoOtCWqXN,69vToJ9BMbbLlFZo7k7A7B,1ab41ytPRTZ6fy8DjHCV2z,44T13PWJ87jb3lFElhVIHx&\
@@ -101,7 +103,7 @@ router.get('/:weather', (req, res, next) => {
     })
     .then(result => {
       // console.log(result.access_token);
-      console.log(fetchSongUrl);
+      // console.log(fetchSongUrl);
       return fetch(fetchSongUrl,{
         method: 'GET',
         headers: {
@@ -109,12 +111,12 @@ router.get('/:weather', (req, res, next) => {
         }
       })
         .then(response => {
-          console.log(response);
+          // console.log(response);
           response = response.json();
           return response;
         }).then(response => {
           const songArr = [];
-          console.log(response);
+          // console.log(response);
           if(response){
             response.tracks.map(item => {
               songArr.push({
@@ -124,7 +126,7 @@ router.get('/:weather', (req, res, next) => {
               });
             });
           }
-          console.log(songArr);
+          // console.log(songArr);
           return res.json(songArr);
         });
     })
