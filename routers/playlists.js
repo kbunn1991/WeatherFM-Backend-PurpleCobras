@@ -65,9 +65,9 @@ router.delete('/:weather/:songTitle', (req, res, next) => {
         // console.log(newResults)
         result.playlists[weather] = newResults;
         // console.log(result)
+        result.save();
+        res.sendStatus(204);
       }
-      result.save();
-      res.json(result);
     })
     .catch(err => {
       next(err);
