@@ -61,12 +61,12 @@ router.get('/:weather', (req, res, next) => {
   case 'Cloudy': 
     filippId = '77AB0zqvso8ALKUZ2HG2mG';
     kaitId = '21a1k8q3DJtsF8GorRfcL8';
-    kevinId = '74hrUbWo7s2EmpQd29XwUd';
-    brandonId = '0fZicSubz8bOekljVhk3PE';
+    kevinId = '4kzyhn8i6Hf8daEBqNPfCy';
+    brandonId = '6aXGgKVRGXlMqQYCIQqo4s';
     ianId = '2SPTGg9SC5MT1FwNX4IYfx';
-    danceability = '0.6266';
-    energy = '0.5458';
-    valence = '0.2198'; 
+    danceability = '0.6508';
+    energy = '0.4952';
+    valence = '0.28898'; 
     break;
   case 'Thunderstorm':
     filippId = '12sYWro0wGQpq0rjE0lKcm';
