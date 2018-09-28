@@ -21,7 +21,6 @@ const {youtubeRouter} = require('./routers');
 const app = express();
 app.use(express.json());
 
-
 //logger middleware
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
