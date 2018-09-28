@@ -22,6 +22,7 @@ router.get('/', (req, res, next) => {
 
 //-------- add a song to a playlist
 router.put('/', (req, res, next) => {
+  console.log(req.body);
   const {weather} = req.body;
   const {artist, songTitle, thumbnail} = req.body;
   const songObj = {artist, songTitle, thumbnail};
