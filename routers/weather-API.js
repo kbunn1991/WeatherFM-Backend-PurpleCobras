@@ -39,9 +39,9 @@ router.get('/:lat/:lng', (req, res, next) => {
       } else if(weatherId >= 300 && weatherId <= 321){
         return res.json('Drizzle');
       } else if(weatherId >= 500 && weatherId <= 531){
-        return res.json('Rain');
+        return res.json('Rainy');
       } else if(weatherId >= 600 && weatherId <= 622){
-        return res.json('Snow');
+        return res.json('Snowy');
       } else if(weatherId >= 701 && weatherId <= 781){
         return res.json('Cloudy');
       } else if(weatherId >= 800 && weatherId <= 804){
