@@ -135,17 +135,19 @@ describe('WeatherFM API - Playlists', function () {
   describe('DELETE /api/users/playlists', function () {
 
     it('should delete a song and return the new playlists', function () {
-      const updateItem = { weather: 'Sunny', artist: 'Bill Withers', songTitle: 'Lovely Day', thumbnail: 'https://i.scdn.co/image/c8977ed4a277af7cad24a7d3944867dc502d0ded' };
+      const weather= 'Sunny'; 
+      const songTitle= 'Lovely Day';
       let data;
       return User.findOne()
         .then(_data => {
           data = _data;
-          return chai.request(app).delete('/api/users/playlists').set('Authorization', `Bearer ${token}`).send(updateItem);
+          return chai.request(app)
+            .delete(`/api/users/playlists/${weather}/${songTitle}`)
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(function (res) {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.a('object');
-          expect(res.body.playlists.Sunny.length).to.not.equal(data.playlists.Sunny.length);
+          console.log(res.body);
+          expect(res).to.have.status(204);
         });
     });
   });
