@@ -7,12 +7,15 @@ const router = express.Router();
 //get endpoint for random retrieval of spotify titles based on weather
 router.get('/:weather', (req, res, next) => {
   const {weather} = req.params;
-  console.log(weather);
+  // console.log(weather);
   let filippId = '';
   let kaitId = '';
   let kevinId = '';
   let brandonId = '';
   let ianId = '';
+  let danceability = '';
+  let energy = '';
+  let valence = '';
 
   switch(weather){
   case 'Sunny':
@@ -20,21 +23,30 @@ router.get('/:weather', (req, res, next) => {
     kaitId = '5RoIXwyTCdyUjpMMkk4uPd';
     kevinId = '17N5FdRwJuv3UXQ7MHnbhF';
     brandonId = '0Z7S8ity4SYlkzbJpejd1v';
-    ianId = '6wmzz9dCztW1zgNXrZIyw8'; 
+    ianId = '6wmzz9dCztW1zgNXrZIyw8';
+    danceability = '0.6032';
+    energy = '0.7502';
+    valence = '0.5678';
     break;
   case 'Rainy':
     filippId = '3ZomZOKK49bjGzeNq5fi35';
     kaitId = '11jzYQcFcGpjXlTWVghPCI';
     kevinId = '41CgzGD7xlgnJe14R4cqkL';
     brandonId = '6MPB8398c9UmGCOes0eg7A';
-    ianId = '2yM6bVAkaJP5YzTBlAgUbK'; 
+    ianId = '2yM6bVAkaJP5YzTBlAgUbK';
+    danceability = '0.4744';
+    energy = '0.5226';
+    valence = '0.35';
     break;
   case 'Drizzle': 
     filippId = '2bBQg0zLuhXcVvqSSriawP';
     kaitId = '1RWRfknqqgTNNPO1EoP7Wo';
     kevinId = '5u5aVJKjSMJr4zesMPz7bL';
     brandonId = '1N49dCsfnMv00ezWlKdEGn';
-    ianId = '0bKWn6sAxH8fSOAgS8z8t6'; 
+    ianId = '0bKWn6sAxH8fSOAgS8z8t6';
+    danceability = '0.3294';
+    energy = '0.326';
+    valence = '0.24374';
     break;
   case 'Snowy': 
     filippId = '3Nx6iu7XpzWL1QMPRJKzqL';
@@ -42,13 +54,19 @@ router.get('/:weather', (req, res, next) => {
     kevinId = '2QjOHCTQ1Jl3zawyYOpxh6';
     brandonId = '4ymHy4hzJ09WxvvT7p0Azy';
     ianId = '5j5VvsEHLlWT6IaEKSGDj9';
+    danceability = '0.631';
+    energy = '0.36364';
+    valence = '0.427';
     break;
   case 'Cloudy': 
     filippId = '77AB0zqvso8ALKUZ2HG2mG';
     kaitId = '21a1k8q3DJtsF8GorRfcL8';
     kevinId = '74hrUbWo7s2EmpQd29XwUd';
     brandonId = '0fZicSubz8bOekljVhk3PE';
-    ianId = '2SPTGg9SC5MT1FwNX4IYfx'; 
+    ianId = '2SPTGg9SC5MT1FwNX4IYfx';
+    danceability = '0.6266';
+    energy = '0.5458';
+    valence = '0.2198'; 
     break;
   case 'Thunderstorm':
     filippId = '12sYWro0wGQpq0rjE0lKcm';
@@ -56,11 +74,16 @@ router.get('/:weather', (req, res, next) => {
     kevinId = '0hL8yBivUahlm1rhQ1a0Xx';
     brandonId = '2Tgj50GmYGlswjb97lxiAf';
     ianId = '4e0GkgtMPZFt41Ua8PlHQL';
+    danceability = '0.5414';
+    energy = '0.618';
+    valence = '0.303';
     break;
   }
-  console.log(filippId, kevinId, kaitId, brandonId, ianId);
-  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='
-  +`${filippId},${kaitId},${kevinId},${brandonId},${ianId}&min_popularity=50&limit=100`;
+  //console.log(filippId, kevinId, kaitId, brandonId, ianId);
+  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='+
+  `${filippId},${kaitId},${kevinId},${brandonId},${ianId}`+
+  `&min_popularity=20&limit=100&target_danceability=${danceability}`+
+  `&target_energy=${energy}&target_valence=${valence}`;
   
   // https://api.spotify.com/v1/recommendations?seed_tracks=\
   // 5uCax9HTNlzGybIStD3vDh,7795WJLVKJoAyVoOtCWqXN,69vToJ9BMbbLlFZo7k7A7B,1ab41ytPRTZ6fy8DjHCV2z,44T13PWJ87jb3lFElhVIHx&\
@@ -80,7 +103,7 @@ router.get('/:weather', (req, res, next) => {
     })
     .then(result => {
       // console.log(result.access_token);
-      console.log(fetchSongUrl);
+      // console.log(fetchSongUrl);
       return fetch(fetchSongUrl,{
         method: 'GET',
         headers: {
@@ -88,12 +111,12 @@ router.get('/:weather', (req, res, next) => {
         }
       })
         .then(response => {
-          console.log(response);
+          // console.log(response);
           response = response.json();
           return response;
         }).then(response => {
           const songArr = [];
-          console.log(response);
+          // console.log(response);
           if(response){
             response.tracks.map(item => {
               songArr.push({
@@ -103,7 +126,7 @@ router.get('/:weather', (req, res, next) => {
               });
             });
           }
-          console.log(songArr);
+          // console.log(songArr);
           return res.json(songArr);
         });
     })
