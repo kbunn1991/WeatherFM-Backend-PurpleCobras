@@ -62,7 +62,7 @@ router.post('/', jsonParser, (req, res, next) => {
       min: 1
     },
     password: {
-      min: 8,
+      min: 6,
       // bcrypt truncates after 72 characters, so let's not give the illusion
       // of security by storing extra (unused) info
       max: 72

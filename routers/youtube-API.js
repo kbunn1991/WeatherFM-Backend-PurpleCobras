@@ -8,8 +8,8 @@ const router = express.Router();
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/:artist/:songTitle', (req, res, next) => {
-  let artist = req.params.artist;
-  let songTitle = req.params.songTitle;
+  let artist = req.params.artist.replace(/[&]/g, '%20');
+  let songTitle = req.params.songTitle.replace(/[&]/g, '%20');
   
   const youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
   `?key=${YOUTUBE_API_KEY}&q=${artist}+${songTitle}+lyrics&part=snippet&maxResults=1&type=video`;
