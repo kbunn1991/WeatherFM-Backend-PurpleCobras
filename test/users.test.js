@@ -148,20 +148,20 @@ describe('WeatherFM API - Users', function () {
             );
           });
       });
-      it('Should reject users with password less than 8 characters', function () {
+      it('Should reject users with password less than 6 characters', function () {
         return chai
           .request(app)
           .post('/api/users')
           .send({
             username,
-            password: '1234567',
+            password: '12345',
             firstName,
             lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
             expect(res.body.message).to.equal(
-              'Must be at least 8 characters long'
+              'Must be at least 6 characters long'
             );
           });
       });

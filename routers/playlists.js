@@ -16,8 +16,9 @@ router.get('/', (req, res, next) => {
     .then(users => {
       res.json(users.playlists);
     })
-    .catch(err => 
-      res.status(500).json({message: 'Internal server error'}));
+    .catch(err => {
+      next(err);
+    });
 });
 
 //-------- add a song to a playlist
@@ -29,8 +30,6 @@ router.put('/', (req, res, next) => {
   // console.log(weather);
   // console.log(songObj, '---');
   const userId = req.user.id;
-  // console.log(userId, '===');
-
   // if (!weather || !artist || !songTitle) {
   //   return res.status(422).json({
   //     code: 422,

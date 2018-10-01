@@ -7,7 +7,6 @@ const {router: weatherRouter} = require('./weather-API');
 const {router: spotifyRouter} = require('./spotify-API');
 const {router: youtubeRouter} = require('./youtube-API');
 
-
 module.exports = {
   User, 
   usersRouter, 

@@ -7,7 +7,6 @@ const {WEATHER_API_KEY} = require('../config');
 
 const router = express.Router();
 
-
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 //api/users/weather
 
@@ -30,7 +29,7 @@ router.get('/:lat/:lng', (req, res, next) => {
     .then(result => {
       const weatherId = result.weather[0].id;
       // console.log(result.weather);
-      // console.log('--->', weatherId, typeof weatherId);
+      // console.log('--->', weatherId);
       //returns a String
       if(weatherId === 800){
         return res.json('Sunny');
