@@ -85,9 +85,6 @@ router.get('/:weather', (req, res, next) => {
   `${filippId},${kaitId},${kevinId},${brandonId},${ianId}`+
   '&min_popularity=20&limit=100';
   
-  // https://api.spotify.com/v1/recommendations?seed_tracks=\
-  // 5uCax9HTNlzGybIStD3vDh,7795WJLVKJoAyVoOtCWqXN,69vToJ9BMbbLlFZo7k7A7B,1ab41ytPRTZ6fy8DjHCV2z,44T13PWJ87jb3lFElhVIHx&\
-  // min_popularity=50&limit=5
   // console.log(weather, SPOTIFY_KEY_64);
   return fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
@@ -103,7 +100,6 @@ router.get('/:weather', (req, res, next) => {
     })
     .then(result => {
       // console.log(result.access_token);
-      // console.log(fetchSongUrl);
       return fetch(fetchSongUrl,{
         method: 'GET',
         headers: {
