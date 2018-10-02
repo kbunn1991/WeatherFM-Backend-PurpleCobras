@@ -8,9 +8,9 @@ const userSchema = new mongoose.Schema({
   playlists: 
     {
       Sunny: [{
-        spotifyId: {type: String},
-        artist: {type: String},
-        songTitle: {type: String},
+        spotifyId: {type: String, required: true},
+        artist: {type: String, required: true},
+        songTitle: {type: String, required: true},
         thumbnail: {type: String}
       }],
       Rainy: [{
