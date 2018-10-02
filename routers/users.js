@@ -127,9 +127,7 @@ router.post('/', jsonParser, (req, res, next) => {
           }
         })
         .then(response => {
-          // console.log(response);
-          response = response.json();
-          return response;
+          return response.json();
         })
         .then(response => {
           if(response.tracks.items[0]){
@@ -181,8 +179,7 @@ router.post('/', jsonParser, (req, res, next) => {
         body: 'grant_type=client_credentials'
       })
         .then(result => {
-          result = result.json();
-          return result;
+          return result.json();
         })
         .then(result => {
           const promises = weatherArr.map(item => {
