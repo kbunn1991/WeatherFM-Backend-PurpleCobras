@@ -4,6 +4,7 @@ const {SPOTIFY_KEY_64} = require('../config');
 const router = express.Router();
 const shuffle = require('shuffle-array');
 
+
 //endpoint is /api/users/rec/:weather
 //get endpoint for random retrieval of spotify titles based on weather
 router.get('/:weather', (req, res, next) => {
@@ -108,6 +109,71 @@ router.get('/:weather', (req, res, next) => {
       })
         .then(response => {
           // console.log(response);
+          response = response.json();
+          return response;
+        }).then(response => {
+          const songArr = [];
+          // console.log(response);
+          if(response){
+            response.tracks.map(item => {
+              songArr.push({
+                artist: item.artists[0].name,
+                songTitle : item.name,
+                thumbnail: item.album.images[0].url
+              });
+            });
+          }
+          shuffle(songArr);
+          return res.json(songArr);
+        });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+//POST ENDPOINT FOR SLIDER
+
+router.post('/', (req, res, next) => {
+  // console.log(weather);
+  // const {danceability} = req.params.danceability;
+  const {danceability, energy, popularity, valence} = req.body;
+  console.log("HITTTTTING POST ENDPOINT")
+  console.log(req.body)
+  console.log("dance!!", danceability);
+  
+  // const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='+
+  // `${filippId},${kaitId},${kevinId},${brandonId},${ianId}`+
+  // '&min_popularity=20&limit=100';
+  
+  // `seed_tracks=0bRXwKfigvpKZUurwqAlEh`+
+
+  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?'+ `seed_tracks=0bRXwKfigvpKZUurwqAlEh`+
+  `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100`;
+
+  // console.log(weather, SPOTIFY_KEY_64);
+  return fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${SPOTIFY_KEY_64}`
+    },
+    body: 'grant_type=client_credentials'
+  })
+    .then(result => {
+      result = result.json();
+      return result;
+    })
+    .then(result => {
+      // console.log(result.access_token);
+      return fetch(fetchSongUrl,{
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${result.access_token}`
+        }
+      })
+        .then(response => {
+          console.log(response);
           response = response.json();
           return response;
         }).then(response => {
