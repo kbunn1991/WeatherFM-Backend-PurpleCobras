@@ -118,7 +118,7 @@ router.post('/', jsonParser, (req, res, next) => {
   const getSongFromSpotify = function (arr, resolve, accessToken){
     const promises = arr.map(item => {
       let songDetails = `https://api.spotify.com/v1/search?type=track&limit=1&q=${item.songTitle}+${item.artist}`;
-      console.log(songDetails, '-----------------');
+      // console.log(songDetails, '-----------------');
       return fetch(songDetails, 
         {
           method: 'GET',
@@ -148,7 +148,6 @@ router.post('/', jsonParser, (req, res, next) => {
       });
   };
 
-  console.log(Sunny.length);
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
@@ -186,27 +185,24 @@ router.post('/', jsonParser, (req, res, next) => {
           return result;
         })
         .then(result => {
-          let accessToken = result.access_token;
           const promises = weatherArr.map(item => {
             return new Promise((resolve, reject) => {
               const arr = Object.values(item)[0];
               if(arr.length){
-                console.log('custom songs');
-                getSongFromSpotify(arr, resolve, accessToken);
+                getSongFromSpotify(arr, resolve, result.access_token);
               }
               else{
                 const weather = Object.keys(item)[0];
-                console.log(songData[weather], 'default songs');
+                // console.log(songData[weather]);
                 resolve(songData[weather]); 
               }
             });
           });
           return Promise.all(promises);
-          // return Sunny, Rainy, Drizzle, Snowy, Cloudy, Thunderstorm;
         });
     })
     .then(result => {
-      console.log(result, '111111111111111111111111111111111111111111111111111111111111');
+      // console.log(result, '111111111111111');
       return User.create({
         username,
         password: hash,
