@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const fetch = require('node-fetch');
 const {SPOTIFY_KEY_64} = require('../config');
