@@ -21,7 +21,9 @@ router.get('/:artist/:title', (req, res, next) => {
 
   return fetch(fetchLyricsUrl, {
     method: 'GET',
-  
+    header: {
+      'content-type': 'application/json'
+    }
   })
     .then (result => {
       //console.log(result);
