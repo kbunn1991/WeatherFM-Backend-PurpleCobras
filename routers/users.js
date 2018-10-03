@@ -98,58 +98,12 @@ router.post('/', jsonParser, (req, res, next) => {
   let {
     username, 
     password, 
-    firstName = '', 
-    Sunny, 
-    Rainy, 
-    Drizzle, 
-    Snowy,
-    Cloudy, 
-    Thunderstorm} = req.body;
-
-  const weatherArr = [
-    {Sunny}, 
-    {Rainy}, 
-    {Drizzle}, 
-    {Snowy},
-    {Cloudy}, 
-    {Thunderstorm}
-  ];
-
-  const getSongFromSpotify = function (arr, resolve, accessToken){
-    const promises = arr.map(item => {
-      let songDetails = `https://api.spotify.com/v1/search?type=track&limit=1&q=${item.songTitle}+${item.artist}`;
-      // console.log(songDetails, '-----------------');
-      return fetch(songDetails, 
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        })
-        .then(response => {
-          return response.json();
-        })
-        .then(response => {
-          if(response.tracks.items[0]){
-            return ({
-              spotifyId: response.tracks.items[0].id,
-              artist: response.tracks.items[0].artists[0].name,
-              songTitle: response.tracks.items[0].name,
-              thumbnail: response.tracks.items[0].album.images[0].url           
-            });
-          }
-        });
-    });
-    Promise.all(promises)
-      .then(result => {
-        resolve(result);
-      });
-  };
+    firstName = ''} = req.body;
 
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
-  let hash;
+
   User.find({username})
     .count()
     .then(count => {
@@ -165,52 +119,18 @@ router.post('/', jsonParser, (req, res, next) => {
       // If there is no existing user, hash the password
       return User.hashPassword(password);
     })
-    .then(_hash => {
-      hash = _hash;
-      //
-      //getting token
-      //
-      return fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type' : 'application/x-www-form-urlencoded',
-          Authorization: `Basic ${SPOTIFY_KEY_64}`
-        },
-        body: 'grant_type=client_credentials'
-      })
-        .then(result => {
-          return result.json();
-        })
-        .then(result => {
-          const promises = weatherArr.map(item => {
-            return new Promise((resolve, reject) => {
-              const arr = Object.values(item)[0];
-              if(arr.length){
-                getSongFromSpotify(arr, resolve, result.access_token);
-              }
-              else{
-                const weather = Object.keys(item)[0];
-                // console.log(songData[weather]);
-                resolve(songData[weather]); 
-              }
-            });
-          });
-          return Promise.all(promises);
-        });
-    })
-    .then(result => {
-      // console.log(result, '111111111111111');
+    .then(hash => {
       return User.create({
         username,
         password: hash,
         firstName,
         playlists: {
-          Sunny: result[0],
-          Rainy: result[1],
-          Drizzle: result[2],
-          Snowy : result[3],
-          Cloudy : result[4],
-          Thunderstorm : result[5]
+          Sunny: [],
+          Rainy: [],
+          Drizzle: [],
+          Snowy : [],
+          Cloudy : [],
+          Thunderstorm : []
         }
       });
     })
