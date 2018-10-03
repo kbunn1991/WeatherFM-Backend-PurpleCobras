@@ -7,7 +7,7 @@ const router = express.Router();
 
 //endpoint is /api/users/lyrics/:artist/:title
 //get endpoint for lyrics of selected song and artist
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
+//router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/:artist/:title', (req, res, next) => {
   let {artist, title} = req.params;
@@ -17,7 +17,7 @@ router.get('/:artist/:title', (req, res, next) => {
   //console.log(title);
   const fetchLyricsUrl = `https://orion.apiseeds.com/api/music/lyric/${artist}/${title}?apikey=${LYRICS_API_KEY}`;
 
-  //console.log(fetchLyricsUrl);
+  console.log(fetchLyricsUrl);
 
   return fetch(fetchLyricsUrl, {
     method: 'GET',
@@ -26,13 +26,15 @@ router.get('/:artist/:title', (req, res, next) => {
     }
   })
     .then (result => {
-      //console.log(result);
+      console.log(result);
       if (result.ok){
         return result.json();
       }
     })
-    .then(lyrics => {
-      res.json(lyrics);
+    .then(data => {
+      //console.log(data, '');
+      // const lyrics =data.result.track.text;
+      res.json(data);
     })
     .catch(err => {
       next(err);

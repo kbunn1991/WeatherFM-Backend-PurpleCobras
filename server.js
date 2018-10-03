@@ -17,7 +17,7 @@ const {authRouter} = require('./routers');
 const {weatherRouter} = require('./routers'); 
 const {spotifyRouter} = require('./routers'); 
 const {youtubeRouter} = require('./routers');
-const lyricsRouter = require('./routers/lyrics-api');
+//const lyricsRouter = require('./routers/lyrics-api');
 
 const app = express();
 app.use(express.json());
@@ -47,7 +47,7 @@ app.use('/api/auth/', authRouter);
 app.use('/api/users/weather', weatherRouter);
 app.use('/api/users/rec', spotifyRouter);
 app.use('/api/users/youtube', youtubeRouter);
-app.use('/api/users/lyrics', lyricsRouter);
+//app.use('/api/users/lyrics', lyricsRouter);
 
 //error handling
 app.use((req, res, next) => {
