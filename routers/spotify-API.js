@@ -137,7 +137,7 @@ router.get('/:weather', (req, res, next) => {
 router.post('/', (req, res, next) => {
   // console.log(weather);
   // const {danceability} = req.params.danceability;
-  const {danceability, energy, popularity, valence} = req.body;
+  const {danceability, energy, popularity, valence, acousticness, loudness} = req.body;
   console.log("HITTTTTING POST ENDPOINT")
   console.log(req.body)
   console.log("dance!!", danceability);
@@ -148,8 +148,11 @@ router.post('/', (req, res, next) => {
   
   // `seed_tracks=0bRXwKfigvpKZUurwqAlEh`+
 
+  //HAVE ONE SEED SONG HARDCODED INTO URL, SO NEED TO ADD VARIABLE SONGIDS
+
   const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?'+ `seed_tracks=0bRXwKfigvpKZUurwqAlEh`+
-  `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100`;
+  `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100` +
+  `&target_loudness${loudness}&target_acousticness${acousticness}`;
 
   // console.log(weather, SPOTIFY_KEY_64);
   return fetch('https://accounts.spotify.com/api/token', {
@@ -173,13 +176,13 @@ router.post('/', (req, res, next) => {
         }
       })
         .then(response => {
-          console.log(response);
+          // console.log(response.body);
           response = response.json();
           return response;
         }).then(response => {
           const songArr = [];
-          // console.log(response);
-          if(response){
+          console.log(response);
+          if(response.tracks !== []){
             response.tracks.map(item => {
               songArr.push({
                 artist: item.artists[0].name,
@@ -187,9 +190,11 @@ router.post('/', (req, res, next) => {
                 thumbnail: item.album.images[0].url
               });
             });
+            shuffle(songArr);
+            return res.json(songArr);
+          } else if (response.tracks === []) {
+              return res.status(423)
           }
-          shuffle(songArr);
-          return res.json(songArr);
         });
     })
     .catch(err => {
