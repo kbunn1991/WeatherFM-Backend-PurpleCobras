@@ -13,7 +13,7 @@ const createAuthToken = function(user) {
     algorithm: 'HS256'
   });
 };
-
+ 
 const localAuth = passport.authenticate('local', {session: false});
 
 // The user provides a username and password to login

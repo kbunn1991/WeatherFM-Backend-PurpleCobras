@@ -18,6 +18,7 @@ const {authRouter} = require('./routers');
 const {weatherRouter} = require('./routers'); 
 const {spotifyRouter} = require('./routers'); 
 const {youtubeRouter} = require('./routers');
+const {updateUserRouter} = require('./routers');
 
 const app = express();
 app.use(express.json());
@@ -44,11 +45,13 @@ passport.use(jwtStrategy);
 
 //routers
 app.use('/api/users/', usersRouter);
+app.use('/api/users/', updateUserRouter);
 app.use('/api/users/playlists', playlistsRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/users/weather', weatherRouter);
 app.use('/api/users/rec', spotifyRouter);
 app.use('/api/users/youtube', youtubeRouter);
+
 
 
 //error handling
