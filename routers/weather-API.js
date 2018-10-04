@@ -53,35 +53,35 @@ router.get('/:lat/:lng', (req, res, next) => {
       // console.log(tempK, typeof tempK);
       let tempC = (tempK - 273.15).toFixed(0);
       let tempF = ((tempC * 1.8) + 32.00).toFixed(0);
-      // console.log(tempC, tempF, result.weather);
+      console.log(tempC, tempF, result.weather);
 
       if(weatherId === 800)
-        return res.json('Sunny');
-      // return res.json({weather: 'Sunny', tempC, tempF});
+        // return res.json('Sunny');
+        return res.json({weather: 'Sunny', tempC, tempF});
 
       else if(weatherId >= 200 && weatherId <= 232) 
-        return res.json('Thunderstorm');
-      // return res.json({weather: 'Thunderstorm', tempC, tempF});
+        // return res.json('Thunderstorm');
+        return res.json({weather: 'Thunderstorm', tempC, tempF});
 
       else if(weatherId >= 300 && weatherId <= 321)
-        return res.json('Drizzle');
-      // return res.json({weather: 'Drizzle', tempC, tempF});
+        // return res.json('Drizzle');
+        return res.json({weather: 'Drizzle', tempC, tempF});
 
       else if(weatherId >= 500 && weatherId <= 531)
-        return res.json('Rainy');
-      // return res.json({weather: 'Rainy', tempC, tempF});
+        // return res.json('Rainy');
+        return res.json({weather: 'Rainy', tempC, tempF});
 
       else if(weatherId >= 600 && weatherId <= 622)
-        return res.json('Snowy');
-      // return res.json({weather: 'Snowy', tempC, tempF});
+        // return res.json('Snowy');
+        return res.json({weather: 'Snowy', tempC, tempF});
 
       else if(weatherId >= 701 && weatherId <= 781)
-        return res.json('Cloudy');
-      // return res.json({weather: 'Cloudy', tempC, tempF});
+        // return res.json('Cloudy');
+        return res.json({weather: 'Cloudy', tempC, tempF});
 
       else if(weatherId >= 800 && weatherId <= 804)
-        return res.json('Cloudy');
-      // return res.json({weather: 'Cloudy', tempC, tempF});
+        // return res.json('Cloudy');
+        return res.json({weather: 'Cloudy', tempC, tempF});
 
     })
     .catch(err => {
