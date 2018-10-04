@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 const {DATABASE_URL} = require('./config'); 
 const { PORT, CLIENT_ORIGIN } = require('./config');
@@ -21,6 +22,8 @@ const {updateUserRouter} = require('./routers');
 
 const app = express();
 app.use(express.json());
+
+app.use(bodyParser.json());
 
 //logger middleware
 app.use(
