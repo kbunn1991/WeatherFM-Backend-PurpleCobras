@@ -17,8 +17,6 @@ router.get('/:weather', (req, res, next) => {
 
   let songList = [];
 
-
-
   return User.findById(userId)
     .then(users => {
       songList = users.playlists[weather];
