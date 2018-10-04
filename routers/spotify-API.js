@@ -2,9 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const fetch = require('node-fetch');
 const {SPOTIFY_KEY_64} = require('../config');
-const router = express.Router();
 const shuffle = require('shuffle-array');
 const User = require('../db/models/userSchema');
+
+const router = express.Router();
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 //endpoint is /api/users/rec/:weather
@@ -15,9 +16,7 @@ router.get('/:weather', (req, res, next) => {
 
   let songList = [];
 
-  // const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='+
-  // `${songList}`+
-  // '&min_popularity=20&limit=100';
+
 
   return User.findById(userId)
     .then(users => {
