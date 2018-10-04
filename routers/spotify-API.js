@@ -142,22 +142,12 @@ router.get('/:weather', (req, res, next) => {
 //POST ENDPOINT FOR SLIDER
 
 router.post('/', (req, res, next) => {
-  // console.log(weather);
-  // const {danceability} = req.params.danceability;
-  const { danceability, energy, popularity, valence, acousticness, loudness } = req.body;
-  console.log("HITTTTTING POST ENDPOINT")
+  const { danceability, energy, popularity, valence, acousticness, loudness, songId1, songId2, songId3 } = req.body;
+  console.log("~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------")
   console.log(req.body)
   console.log("dance!!", danceability);
 
-  // const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='+
-  // `${filippId},${kaitId},${kevinId},${brandonId},${ianId}`+
-  // '&min_popularity=20&limit=100';
-
-  // `seed_tracks=0bRXwKfigvpKZUurwqAlEh`+
-
-  //HAVE ONE SEED SONG HARDCODED INTO URL, SO NEED TO ADD VARIABLE SONGIDS
-
-  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + `seed_tracks=0bRXwKfigvpKZUurwqAlEh` +
+  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + `seed_tracks=${songId1},${songId2},${songId3},` +
     `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100` +
     `&target_loudness${loudness}&target_acousticness${acousticness}`;
 
@@ -188,7 +178,7 @@ router.post('/', (req, res, next) => {
           return response;
         }).then(response => {
           const songArr = [];
-          console.log(response);
+          // console.log(response);
           if (response.tracks !== []) {
             response.tracks.map(item => {
               songArr.push({
