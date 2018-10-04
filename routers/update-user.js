@@ -14,8 +14,9 @@ const jsonParser = bodyParser.json();
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.put('/', jsonParser, (req, res, next) => {
+  // console.log(req.body, 'req.body');
   const userId = req.user.id;
-  console.log(userId);
+  // console.log(userId);
   let userData;
 
   let {
@@ -34,9 +35,11 @@ router.put('/', jsonParser, (req, res, next) => {
     {Cloudy}, 
     {Thunderstorm}
   ];
+  // console.log(weatherArr[0]);
 
   const getSongFromSpotify = function (arr, resolve, accessToken){
     const promises = arr.map(item => {
+      console.log(item);
       let songDetails = `https://api.spotify.com/v1/search?type=track&limit=1&q=${item.songTitle}+${item.artist}`;
       // console.log(songDetails, '-----------------');
       return fetch(songDetails, 
@@ -105,7 +108,7 @@ router.put('/', jsonParser, (req, res, next) => {
       }
     })
     .then(result => {
-      console.log(result[0], '---------------');
+      // console.log(result[0], '---------------');
       // console.log(userData.playlists);
       userData.playlists.Sunny.push(...result[0]);
       userData.playlists.Rainy.push(...result[1]);
