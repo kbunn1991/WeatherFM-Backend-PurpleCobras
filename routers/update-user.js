@@ -116,7 +116,6 @@ router.put('/', jsonParser, (req, res, next) => {
       userData.save();
       // User.findById(userId)
       //   .then(response => {
-
       //   });
       // console.log(result, '111111111111111');
       // return User.create({

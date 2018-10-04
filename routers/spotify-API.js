@@ -138,9 +138,9 @@ router.post('/', (req, res, next) => {
   // console.log(weather);
   // const {danceability} = req.params.danceability;
   const {danceability, energy, popularity, valence, acousticness, loudness} = req.body;
-  console.log("HITTTTTING POST ENDPOINT")
-  console.log(req.body)
-  console.log("dance!!", danceability);
+  console.log('HITTTTTING POST ENDPOINT');
+  console.log(req.body);
+  console.log('dance!!', danceability);
   
   // const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks='+
   // `${filippId},${kaitId},${kevinId},${brandonId},${ianId}`+
@@ -150,7 +150,7 @@ router.post('/', (req, res, next) => {
 
   //HAVE ONE SEED SONG HARDCODED INTO URL, SO NEED TO ADD VARIABLE SONGIDS
 
-  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?'+ `seed_tracks=0bRXwKfigvpKZUurwqAlEh`+
+  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?'+ 'seed_tracks=0bRXwKfigvpKZUurwqAlEh'+
   `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100` +
   `&target_loudness${loudness}&target_acousticness${acousticness}`;
 
@@ -193,7 +193,7 @@ router.post('/', (req, res, next) => {
             shuffle(songArr);
             return res.json(songArr);
           } else if (response.tracks === []) {
-              return res.status(423)
+            return res.status(423);
           }
         });
     })
