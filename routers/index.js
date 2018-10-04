@@ -6,10 +6,12 @@ const {router: authRouter} = require('./auth');
 const {router: weatherRouter} = require('./weather-API');
 const {router: spotifyRouter} = require('./spotify-API');
 const {router: youtubeRouter} = require('./youtube-API');
+const {router: updateUserRouter} = require('./update-user');
 
 module.exports = {
   User, 
-  usersRouter, 
+  usersRouter,
+  updateUserRouter, 
   playlistsRouter, 
   authRouter, 
   weatherRouter,
