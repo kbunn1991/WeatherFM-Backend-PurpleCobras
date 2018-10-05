@@ -6,13 +6,13 @@ const shuffle = require('shuffle-array');
 const User = require('../db/models/userSchema');
 const router = express.Router();
 
-arrayAverage = array => {
+const arrayAverage = array => {
   let sum = 0;
   for (let i = 0; i < array.length; i++) {
-    sum += array[i]
+    sum += array[i];
   }
   return sum / array.length;
-}
+};
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
@@ -61,7 +61,9 @@ router.get('/:weather', (req, res, next) => {
               const songArr = [];
               if (response) {
                 response.tracks.map(item => {
+                  console.log(item.id);
                   songArr.push({
+                    spotifyId: item.id,
                     artist: item.artists[0].name,
                     songTitle: item.name,
                     thumbnail: item.album.images[0].url
@@ -88,8 +90,8 @@ router.get('/:weather', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { danceability, energy, popularity, valence, acousticness, loudness, songId1, songId2, songId3 } = req.body;
-  console.log("~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------")
-  console.log(req.body)
+  console.log('~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------');
+  console.log(req.body);
 
   const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + `seed_tracks=${songId1},${songId2},${songId3},` +
     `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100` +
@@ -109,7 +111,7 @@ router.post('/', (req, res, next) => {
     })
     .then(result => {
       console.log(result.access_token);
-      console.log(fetchSongUrl)
+      console.log(fetchSongUrl);
       return fetch(fetchSongUrl, {
         method: 'GET',
         headers: {
@@ -133,7 +135,7 @@ router.post('/', (req, res, next) => {
             shuffle(songArr);
             return res.json(songArr);
           } else if (response.tracks === []) {
-            return res.status(423)
+            return res.status(423);
           }
         });
     })
@@ -145,7 +147,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/averages/:songIds', (req, res, next) => {
   const { songIds } = req.params;
-  console.log("------------GETTING AVERAGES---------------", songIds);
+  // console.log('------------GETTING AVERAGES---------------', songIds);
 
   const fetchAverageUrl = `https://api.spotify.com/v1/audio-features?ids=${songIds}`;
 
@@ -193,7 +195,7 @@ router.get('/averages/:songIds', (req, res, next) => {
                 averageObj.acousticness.push(item.acousticness);
                 averageObj.valence.push(item.valence);
               }
-            })
+            });
             averageObj.danceability = arrayAverage(averageObj.danceability);
             averageObj.energy = arrayAverage(averageObj.energy);
             averageObj.loudness = arrayAverage(averageObj.loudness);
@@ -202,7 +204,7 @@ router.get('/averages/:songIds', (req, res, next) => {
             console.log(averageObj);
             return res.json(averageObj);
           } else if (response.tracks === []) {
-            return res.status(423)
+            return res.status(423);
           }
         });
     })
