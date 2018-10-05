@@ -41,7 +41,7 @@ router.get('/:artist/:songTitle/:mode', (req, res, next) => {
       let videoInfo = {videoTitle, videoURL};
       console.log(videoInfo);
       return res.json(videoInfo);
-    })
+    }) 
     .catch(err => {
       next(err);
     });
