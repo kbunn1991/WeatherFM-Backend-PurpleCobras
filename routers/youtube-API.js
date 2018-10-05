@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const fetch = require('node-fetch');
 const passport = require('passport');
@@ -7,12 +8,20 @@ const router = express.Router();
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
-router.get('/:artist/:songTitle', (req, res, next) => {
+router.get('/:artist/:songTitle/:mode', (req, res, next) => {
   let artist = req.params.artist.replace(/[&]/g, '%20');
   let songTitle = req.params.songTitle.replace(/[&]/g, '%20');
-  
-  const youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
+  let {mode} = req.params;
+  let youtubeUrl ='';
+  if (mode === 'video'){
+    youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
+  `?key=${YOUTUBE_API_KEY}&q=${artist}+${songTitle}&part=snippet&maxResults=1&type=video`;
+  }
+  else if (mode === 'karaoke'){
+    youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
   `?key=${YOUTUBE_API_KEY}&q=${artist}+${songTitle}+lyrics&part=snippet&maxResults=1&type=video`;
+  }
+
   // console.log(YOUTUBE_API_KEY)
   return fetch(youtubeUrl, {
     method: 'GET',
@@ -25,15 +34,18 @@ router.get('/:artist/:songTitle', (req, res, next) => {
       return result;
     })
     .then(result => {
+      console.log(result.items[0].snippet.title);
+      let videoTitle = result.items[0].snippet.title;
       let videoId = result.items[0].id.videoId;
       let videoURL = 'https://www.youtube.com/watch?v=' + videoId;
-      // console.log(videoURL);
-      return res.json(videoURL);
-    })
+      let videoInfo = {videoTitle, videoURL};
+      console.log(videoInfo);
+      return res.json(videoInfo);
+    }) 
     .catch(err => {
       next(err);
     });
-});
+}); 
 
 
 module.exports = { router };
