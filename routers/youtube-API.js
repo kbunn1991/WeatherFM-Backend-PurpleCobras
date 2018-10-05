@@ -45,7 +45,7 @@ router.get('/:artist/:songTitle/:mode', (req, res, next) => {
     .catch(err => {
       next(err);
     });
-});
+}); 
 
 
 module.exports = { router };
