@@ -24,8 +24,8 @@ router.get('/', (req, res, next) => {
 //-------- add a song to a playlist
 router.put('/', (req, res, next) => {
   const {weather} = req.body;
-  const {artist, songTitle, thumbnail} = req.body;
-  const songObj = {artist, songTitle, thumbnail};
+  const {spotifyId, artist, songTitle, thumbnail} = req.body;
+  const songObj = {spotifyId, artist, songTitle, thumbnail};
   // console.log(weather);
   // console.log(songObj, '---');
   const userId = req.user.id;
@@ -41,6 +41,7 @@ router.put('/', (req, res, next) => {
     .then(result => {
       // console.log(result);
       if(result){
+        // console.log(songObj);
         result.playlists[weather].push(songObj);
       }
       result.save();

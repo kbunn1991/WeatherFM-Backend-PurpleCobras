@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 const {DATABASE_URL} = require('./config'); 
 const { PORT, CLIENT_ORIGIN } = require('./config');
@@ -17,10 +18,12 @@ const {authRouter} = require('./routers');
 const {weatherRouter} = require('./routers'); 
 const {spotifyRouter} = require('./routers'); 
 const {youtubeRouter} = require('./routers');
-//const lyricsRouter = require('./routers/lyrics-api');
+const {updateUserRouter} = require('./routers');
 
 const app = express();
 app.use(express.json());
+
+app.use(bodyParser.json());
 
 //logger middleware
 app.use(
@@ -42,12 +45,14 @@ passport.use(jwtStrategy);
 
 //routers
 app.use('/api/users/', usersRouter);
+app.use('/api/users/', updateUserRouter);
 app.use('/api/users/playlists', playlistsRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/users/weather', weatherRouter);
 app.use('/api/users/rec', spotifyRouter);
 app.use('/api/users/youtube', youtubeRouter);
 //app.use('/api/users/lyrics', lyricsRouter);
+
 
 //error handling
 app.use((req, res, next) => {
