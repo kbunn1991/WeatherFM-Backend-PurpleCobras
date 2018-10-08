@@ -1,14 +1,12 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-
+// const passport = require('passport');
+// const jwt = require('jsonwebtoken');
 const {WEATHER_API_KEY} = require('../config');
 
 const router = express.Router();
 
-// router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
-//api/users/weather
+// const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
 //get weather endpoint for openweathermap.com provided lat and lng
 router.get('/:lat/:lng', (req, res, next) => {
