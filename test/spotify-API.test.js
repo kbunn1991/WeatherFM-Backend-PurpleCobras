@@ -48,7 +48,7 @@ describe('WeatherFM API - spotify API', function () {
           expect(res).to.be.json;
           expect(res.body).to.be.a('array');
           res.body.forEach(song => {
-            expect(song).to.have.keys('artist', 'songTitle', 'thumbnail');
+            expect(song).to.have.keys('artist', 'songTitle', 'thumbnail', 'spotifyId');
           });
         });
     });

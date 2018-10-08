@@ -47,7 +47,8 @@ describe('WeatherFM API - weather API', function () {
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body).to.be.a('string');
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.have.keys(['weather', 'tempC', 'tempF']);
         });
     });
   });
