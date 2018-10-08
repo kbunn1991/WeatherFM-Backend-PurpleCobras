@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const passport = require('passport');
 const fetch = require('node-fetch');
@@ -61,7 +62,7 @@ router.get('/:weather', (req, res, next) => {
               const songArr = [];
               if (response) {
                 response.tracks.map(item => {
-                  console.log(item.id);
+                  // console.log(item.id);
                   songArr.push({
                     spotifyId: item.id,
                     artist: item.artists[0].name,
