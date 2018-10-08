@@ -7,7 +7,7 @@ const {WEATHER_API_KEY} = require('../config');
 
 const router = express.Router();
 
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
+// router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 //api/users/weather
 
 //get weather endpoint for openweathermap.com provided lat and lng
