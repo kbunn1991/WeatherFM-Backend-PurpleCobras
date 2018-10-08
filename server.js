@@ -1,4 +1,4 @@
-'use strict';
+
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -12,18 +12,16 @@ const { dbConnect } = require('./db-mongoose');
 
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
-const {usersRouter } = require('./routers');
-const {playlistsRouter } = require('./routers');
-const {authRouter} = require('./routers');
-const {weatherRouter} = require('./routers'); 
-const {spotifyRouter} = require('./routers'); 
-const {youtubeRouter} = require('./routers');
-const {updateUserRouter} = require('./routers');
+const {usersRouter, playlistsRouter, authRouter, weatherRouter,
+  spotifyRouter, youtubeRouter, updateUserRouter } = require('./routers');
 
 const app = express();
-app.use(express.json());
 
 app.use(bodyParser.json());
+
+//auth
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 //logger middleware
 app.use(
@@ -38,10 +36,6 @@ app.use(
     origin: CLIENT_ORIGIN
   })
 );
-
-//auth
-passport.use(localStrategy);
-passport.use(jwtStrategy);
 
 //routers
 app.use('/api/users/', usersRouter);

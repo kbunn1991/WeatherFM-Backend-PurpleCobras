@@ -6,9 +6,9 @@ const { YOUTUBE_API_KEY } = require('../config');
 
 const router = express.Router();
 
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
-router.get('/:artist/:songTitle/:mode', (req, res, next) => {
+router.get('/:artist/:songTitle/:mode', jwtAuth, (req, res, next) => {
   let artist = req.params.artist.replace(/[&]/g, '%20');
   let songTitle = req.params.songTitle.replace(/[&]/g, '%20');
   let {mode} = req.params;
