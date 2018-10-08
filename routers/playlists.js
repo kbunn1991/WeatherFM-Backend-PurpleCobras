@@ -11,7 +11,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: tr
 //---------get all playlists for one specific user
 router.get('/', jwtAuth, (req, res, next) => {
   const userId = req.user.id;
-  console.log(userId);
+  // console.log(userId);
   return User.findById(userId)
     .then(users => {
       res.json(users.playlists);

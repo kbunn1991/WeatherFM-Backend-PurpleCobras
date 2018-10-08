@@ -1,14 +1,9 @@
-
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
 const app = require('../server');
-
 const User = require('../db/models/userSchema');
 const seedUsers = require('../db/seed/users');
-
 const { TEST_DATABASE_URL, JWT_SECRET } = require('../config');
 const jwt = require('jsonwebtoken');
 
@@ -18,7 +13,7 @@ const expect = chai.expect;
 let token;
 let user;
 
-describe('WeatherFM API - youtube API', function () {
+describe('WeatherFM API - update user API', function () {
   before(function () {
     return mongoose.connect(TEST_DATABASE_URL)
       .then(() => mongoose.connection.db.dropDatabase());
@@ -39,23 +34,15 @@ describe('WeatherFM API - youtube API', function () {
     return mongoose.disconnect();
   });
 
-  describe('GET /api/users/youtube/:artist/:song/:mode', function () {
-    //think theres some issue with the code on backend because its returning the
-    //entire user instead of just the youtube url
+  describe('PUT /api/users', function () {
+    it('it should update user with default seed songs if they skip onboarding', function () {
 
-
-    it('should return an object with youtube url and title', function () {
-      const artist = 'prince';
-      const songTitle = 'purple+rain';
-      const mode = 'video';
-      return Promise.all([
-        chai.request(app).get(`/api/users/youtube/${artist}/${songTitle}/${mode}`).set('Authorization', `Bearer ${token}`)
-      ])
-        .then(([res]) => {
+      return chai.request(app).get(`/api/users/`).set('Authorization', `Bearer ${token}`)
+        .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
-          expect(res.body).to.have.keys(['videoTitle', 'videoURL'])
+          expect(res.body).to.have.keys(['weather', 'tempC', 'tempF']);
         });
     });
   });

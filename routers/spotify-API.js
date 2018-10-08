@@ -91,8 +91,8 @@ router.get('/:weather', jwtAuth, (req, res, next) => {
 
 router.post('/', jwtAuth, (req, res, next) => {
   const { danceability, energy, popularity, valence, acousticness, loudness, songId1, songId2, songId3 } = req.body;
-  console.log('~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------');
-  console.log(req.body);
+  // console.log('~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------');
+  // console.log(req.body);
 
   const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + `seed_tracks=${songId1},${songId2},${songId3},` +
     `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100` +
@@ -111,8 +111,8 @@ router.post('/', jwtAuth, (req, res, next) => {
       return result.json();
     })
     .then(result => {
-      console.log(result.access_token);
-      console.log(fetchSongUrl);
+      // console.log(result.access_token);
+      // console.log(fetchSongUrl);
       return fetch(fetchSongUrl, {
         method: 'GET',
         headers: {
@@ -124,10 +124,11 @@ router.post('/', jwtAuth, (req, res, next) => {
         })
         .then(response => {
           const songArr = [];
-          console.log(response);
+          // console.log(response);
           if (response.tracks !== []) {
             response.tracks.map(item => {
               songArr.push({
+                spotifyId: item.id,
                 artist: item.artists[0].name,
                 songTitle: item.name,
                 thumbnail: item.album.images[0].url

@@ -40,7 +40,7 @@ describe('WeatherFM API - weather API', function () {
   });
 
   describe('GET /api/users/weather/:lat/:lng', function () {
-    it('should return the proper weather string', function () {
+    it('should return an object with weather and two temps', function () {
       const lat = 44;
       const lng = 121;
       return chai.request(app).get(`/api/users/weather/${lat}/${lng}`).set('Authorization', `Bearer ${token}`)
