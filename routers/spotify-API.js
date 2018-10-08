@@ -15,11 +15,11 @@ const arrayAverage = array => {
   return sum / array.length;
 };
 
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
 //endpoint is /api/users/rec/:weather
 //get endpoint for random retrieval of spotify titles based on weather
-router.get('/:weather', (req, res, next) => {
+router.get('/:weather', jwtAuth, (req, res, next) => {
   const { weather } = req.params;
   const userId = req.user.id;
 
@@ -89,7 +89,7 @@ router.get('/:weather', (req, res, next) => {
 
 //POST ENDPOINT FOR SLIDER
 
-router.post('/', (req, res, next) => {
+router.post('/', jwtAuth, (req, res, next) => {
   const { danceability, energy, popularity, valence, acousticness, loudness, songId1, songId2, songId3 } = req.body;
   console.log('~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------');
   console.log(req.body);
@@ -146,7 +146,7 @@ router.post('/', (req, res, next) => {
 });
 
 
-router.get('/averages/:songIds', (req, res, next) => {
+router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
   const { songIds } = req.params;
   // console.log('------------GETTING AVERAGES---------------', songIds);
 
