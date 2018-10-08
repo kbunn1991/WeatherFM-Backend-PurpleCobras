@@ -5,11 +5,11 @@ const User = require('../db/models/userSchema');
 
 const router = express.Router();
 
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 //seed data password for user1 is password
 
 //---------get all playlists for one specific user
-router.get('/', (req, res, next) => {
+router.get('/', jwtAuth, (req, res, next) => {
   const userId = req.user.id;
   console.log(userId);
   return User.findById(userId)
@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
 });
 
 //-------- add a song to a playlist
-router.put('/', (req, res, next) => {
+router.put('/', jwtAuth, (req, res, next) => {
   const {weather} = req.body;
   const {spotifyId, artist, songTitle, thumbnail} = req.body;
   const songObj = {spotifyId, artist, songTitle, thumbnail};
@@ -53,7 +53,7 @@ router.put('/', (req, res, next) => {
 });
 
 //--------remove a song from a playlist
-router.delete('/:weather/:songTitle', (req, res, next) => {
+router.delete('/:weather/:songTitle', jwtAuth, (req, res, next) => {
   const {weather, songTitle} = req.params;
   // console.log(weather);
   const userId = req.user.id;

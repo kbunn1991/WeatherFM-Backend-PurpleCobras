@@ -9,11 +9,9 @@ const User = require('../db/models/userSchema');
 
 const router = express.Router();
 
-const jsonParser = bodyParser.json();
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
-
-router.put('/', jsonParser, (req, res, next) => {
+router.put('/', jwtAuth, (req, res, next) => {
   // console.log(req.body, 'req.body');
   const userId = req.user.id;
   // console.log(userId);

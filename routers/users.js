@@ -1,6 +1,5 @@
 'use strict';
 const express = require('express');
-const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const {SPOTIFY_KEY_64} = require('../config');
 const songData = require('../db/data/data');
@@ -9,10 +8,8 @@ const User = require('../db/models/userSchema');
 
 const router = express.Router();
 
-const jsonParser = bodyParser.json();
-
 // Post to register a new user
-router.post('/', jsonParser, (req, res, next) => {
+router.post('/', (req, res, next) => {
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
   

@@ -12,16 +12,10 @@ const { dbConnect } = require('./db-mongoose');
 
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
-const {usersRouter } = require('./routers');
-const {playlistsRouter } = require('./routers');
-const {authRouter} = require('./routers');
-const {weatherRouter} = require('./routers'); 
-const {spotifyRouter} = require('./routers'); 
-const {youtubeRouter} = require('./routers');
-const {updateUserRouter} = require('./routers');
+const {usersRouter, playlistsRouter, authRouter, weatherRouter,
+   spotifyRouter, youtubeRouter, updateUserRouter } = require('./routers');
 
 const app = express();
-app.use(express.json());
 
 app.use(bodyParser.json());
 
