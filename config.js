@@ -1,4 +1,4 @@
-
+'use strict';
 require('dotenv').config();
 
 module.exports = {
@@ -14,4 +14,5 @@ module.exports = {
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
   WEATHER_API_KEY: process.env.WEATHER_API_KEY,
   SPOTIFY_KEY_64: process.env.SPOTIFY_KEY_64,
+  LYRICS_API_KEY: process.env.LYRICS_API_KEY
 };
