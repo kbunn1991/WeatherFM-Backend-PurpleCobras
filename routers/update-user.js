@@ -90,8 +90,8 @@ router.put('/', jwtAuth, (req, res, next) => {
               return new Promise((resolve, reject) => {
                 const arr = Object.values(item)[0];
                 // changed arr.length to arr
-                console.log(arr)
-                if(arr){
+                // console.log(arr)
+                if(arr !== undefined){
                   getSongFromSpotify(arr, resolve, result.access_token);
                 }
                 else{
