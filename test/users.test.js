@@ -1,9 +1,6 @@
-
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
 const app = require('../server');
 const User = require('../db/models/userSchema');
 const { TEST_DATABASE_URL } = require('../config');
@@ -42,7 +39,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             password,
             firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -56,7 +52,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username,
             firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -71,7 +66,6 @@ describe('WeatherFM API - Users', function () {
             username: 1234,
             password,
             firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -88,7 +82,6 @@ describe('WeatherFM API - Users', function () {
             username,
             password: 1234,
             firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -105,7 +98,6 @@ describe('WeatherFM API - Users', function () {
             username: ` ${username} `,
             password,
             firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -122,7 +114,6 @@ describe('WeatherFM API - Users', function () {
             username,
             password: ` ${password} `,
             firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);

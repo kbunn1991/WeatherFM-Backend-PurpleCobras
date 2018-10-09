@@ -1,14 +1,9 @@
-
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
 const app = require('../server');
-
 const User = require('../db/models/userSchema');
 const seedUsers = require('../db/seed/users');
-
 const { TEST_DATABASE_URL, JWT_SECRET } = require('../config');
 const jwt = require('jsonwebtoken');
 
@@ -39,21 +34,23 @@ describe('WeatherFM API - youtube API', function () {
     return mongoose.disconnect();
   });
 
-  describe('GET /api/users/youtube/:song', function () {
+  describe('GET /api/users/youtube/:artist/:song/:mode', function () {
     //think theres some issue with the code on backend because its returning the
     //entire user instead of just the youtube url
 
 
-    it('should return a valid youtube url', function () {
+    it('should return an object with youtube url and title', function () {
       const artist = 'prince';
       const songTitle = 'purple+rain';
+      const mode = 'video';
       return Promise.all([
-        chai.request(app).get(`/api/users/youtube/${artist}/${songTitle}`).set('Authorization', `Bearer ${token}`)
+        chai.request(app).get(`/api/users/youtube/${artist}/${songTitle}/${mode}`).set('Authorization', `Bearer ${token}`)
       ])
         .then(([res]) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body).to.be.a('string');
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.have.keys(['videoTitle', 'videoURL'])
         });
     });
   });
