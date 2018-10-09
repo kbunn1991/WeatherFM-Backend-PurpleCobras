@@ -91,7 +91,7 @@ router.put('/', jwtAuth, (req, res, next) => {
                 const arr = Object.values(item)[0];
                 // changed arr.length to arr
                 // console.log(arr)
-                if(arr !== undefined){
+                if(arr.length){
                   getSongFromSpotify(arr, resolve, result.access_token);
                 }
                 else{
