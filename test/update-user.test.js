@@ -36,13 +36,37 @@ describe('WeatherFM API - update user API', function () {
 
   describe('PUT /api/users', function () {
     it('it should update user with default seed songs if they skip onboarding', function () {
-
-      return chai.request(app).get(`/api/users/`).set('Authorization', `Bearer ${token}`)
+      const defaultSongArr = [
+        {Sunny: []},
+        {Rainy: []},
+        {Drizzle: []},
+        {Snowy: []},
+        {Cloudy: []},
+        {Thunderstorm: []}
+      ]
+      return chai.request(app).put(`/api/users/`).set('Authorization', `Bearer ${token}`).send(defaultSongArr)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body).to.be.a('object');
-          expect(res.body).to.have.keys(['weather', 'tempC', 'tempF']);
+          expect(res.body).to.equal('OK')
+          // expect(res.body).to.have.keys(['weather', 'tempC', 'tempF']);
+        });
+    });
+    it('it should update user with default seed songs that they added', function () {
+      const songArr = [
+        {Sunny: [{artist: "smash mouth", songTitle: "all star"}]},
+        {Rainy: []},
+        {Drizzle: []},
+        {Snowy: []},
+        {Cloudy: []},
+        {Thunderstorm: []}
+      ]
+      return chai.request(app).put(`/api/users/`).set('Authorization', `Bearer ${token}`).send(songArr)
+        .then((res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.equal('OK')
+          // expect(res.body).to.have.keys(['weather', 'tempC', 'tempF']);
         });
     });
   });

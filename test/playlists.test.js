@@ -39,7 +39,6 @@ describe('WeatherFM API - Playlists', function () {
   });
 
   describe('GET /api/users/playlists', function () {
-
     it('should return all playlists for that user', function () {
       return Promise.all([
         User.find()
@@ -74,7 +73,6 @@ describe('WeatherFM API - Playlists', function () {
   });
 
   describe('PUT /api/users/playlists', function () {
-
     it('should add song to playlist', function () {
       const updateItem = { weather: 'Sunny', artist: 'prince', songTitle: 'purple rain', thumbnail: 'blahblah' };
       let data;
@@ -128,7 +126,6 @@ describe('WeatherFM API - Playlists', function () {
   });
 
   describe('DELETE /api/users/playlists', function () {
-
     it('should delete a song and return the new playlists', function () {
       const weather= 'Sunny'; 
       const songTitle= 'Lovely Day';

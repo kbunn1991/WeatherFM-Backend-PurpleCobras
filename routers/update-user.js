@@ -89,7 +89,9 @@ router.put('/', jwtAuth, (req, res, next) => {
             const promises = weatherArr.map(item => {
               return new Promise((resolve, reject) => {
                 const arr = Object.values(item)[0];
-                if(arr.length){
+                // changed arr.length to arr
+                console.log(arr)
+                if(arr){
                   getSongFromSpotify(arr, resolve, result.access_token);
                 }
                 else{
