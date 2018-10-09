@@ -16,7 +16,7 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
   if (lat !== '_') {
     parameters = `lat=${lat}&lon=${lng}`;
   } else if (cityZip !== '_') {
-    parameters = `q=${cityZip}`;
+    parameters = `q=${cityZip},us`;
   }
 
   // const numLat = Number(lat);
@@ -52,6 +52,14 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
   })
     .then(result => {
       return result.json();
+    })
+    .then(result =>{
+      if(result.cod !== 200){
+        const err = new Error('Invalid city or zip-code. Please try again');
+        err.status = 404;
+        return next(err);
+      }
+      return result;
     })
     .then(result => {
       const weatherId = result.weather[0].id;
