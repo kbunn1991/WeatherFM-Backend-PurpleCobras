@@ -1,10 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const passport = require('passport');
 const {SPOTIFY_KEY_64} = require('../config');
 const songData = require('../db/data/data');
-
 const User = require('../db/models/userSchema');
 
 const router = express.Router();
@@ -37,7 +35,7 @@ router.put('/', jwtAuth, (req, res, next) => {
 
   const getSongFromSpotify = function (arr, resolve, accessToken){
     const promises = arr.map(item => {
-      console.log(item);
+      // console.log(item);
       let songDetails = `https://api.spotify.com/v1/search?type=track&limit=1&q=${item.songTitle}+${item.artist}`;
       // console.log(songDetails, '-----------------');
       return fetch(songDetails, 
@@ -91,6 +89,8 @@ router.put('/', jwtAuth, (req, res, next) => {
             const promises = weatherArr.map(item => {
               return new Promise((resolve, reject) => {
                 const arr = Object.values(item)[0];
+                // changed arr.length to arr
+                // console.log(arr)
                 if(arr.length){
                   getSongFromSpotify(arr, resolve, result.access_token);
                 }
