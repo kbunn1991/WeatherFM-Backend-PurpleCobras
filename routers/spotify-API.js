@@ -91,7 +91,6 @@ router.get('/:weather', jwtAuth, (req, res, next) => {
 
 router.post('/', jwtAuth, (req, res, next) => {
   const { danceability, energy, popularity, valence, acousticness, loudness, songId1, songId2, songId3 } = req.body;
-  // console.log('~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------');
   // console.log(req.body);
 
   const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + `seed_tracks=${songId1},${songId2},${songId3},` +
@@ -152,7 +151,6 @@ router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
   // console.log('------------GETTING AVERAGES---------------', songIds);
 
   const fetchAverageUrl = `https://api.spotify.com/v1/audio-features?ids=${songIds}`;
-
   // console.log(weather, SPOTIFY_KEY_64);
   return fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',

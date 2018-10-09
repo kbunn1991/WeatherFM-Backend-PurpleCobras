@@ -29,13 +29,6 @@ router.put('/', jwtAuth, (req, res, next) => {
   // console.log(weather);
   // console.log(songObj, '---');
   const userId = req.user.id;
-  // if (!weather || !artist || !songTitle) {
-  //   return res.status(422).json({
-  //     code: 422,
-  //     reason: 'ValidationError',
-  //     message: `Missing weather or song info in request body`,
-  //   });
-  // }
 
   return User.findById(userId)
     .then(result => {
@@ -46,7 +39,7 @@ router.put('/', jwtAuth, (req, res, next) => {
         let duplicate = result.playlists[weather].filter(song => song.songTitle === songObj.songTitle && song.artist === songObj.artist)
         // console.log(duplicate)
         if (duplicate.length) {
-          console.log("HEEEEYYYY")
+          // console.log("HEEEEYYYY")
           res.status(422).end();
         } else {
           result.playlists[weather].push(songObj);
