@@ -38,7 +38,8 @@ describe('WeatherFM API - weather API', function () {
     it('should return an object with weather and two temps', function () {
       const lat = 44;
       const lng = 121;
-      return chai.request(app).get(`/api/users/weather/${lat}/${lng}`).set('Authorization', `Bearer ${token}`)
+      const cityZip = '_';
+      return chai.request(app).get(`/api/users/weather/${lat}/${lng}/${cityZip}`).set('Authorization', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
