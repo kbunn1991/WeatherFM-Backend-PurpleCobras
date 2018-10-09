@@ -1,6 +1,6 @@
 # WeatherFM
 A playlist app that generates mood music based on the weather in your area ☀️🎶⛅🎶☁️
-[![Build Status](https://www.travis-ci.org/thinkful-ei22/WeatherFM-Client-PurpleCobras.png)](https://www.travis-ci.org/thinkful-ei22/WeatherFM-Client-PurpleCobras)
+[![Build Status](https://www.travis-ci.org/thinkful-ei22/WeatherFM-Backend-PurpleCobras.png)](https://www.travis-ci.org/thinkful-ei22/WeatherFM-Backend-PurpleCobras)
 
 ## Link to deployed version on Heroku:
 https://weatherfm-client.herokuapp.com/
