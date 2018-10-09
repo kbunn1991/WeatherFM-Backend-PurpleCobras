@@ -7,34 +7,42 @@ const {WEATHER_API_KEY} = require('../config');
 const router = express.Router();
 
 // const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
-
+///api/users/weather
 //get weather endpoint for openweathermap.com provided lat and lng
-router.get('/:lat/:lng', (req, res, next) => {
-  const {lat, lng} = req.params;
-  const numLat = Number(lat);
-  const numLng = Number(lng);
+router.get('/:lat/:lng/:cityZip', (req, res, next) => {
+  const {lat, lng, cityZip} = req.params;
+  let parameters = '';
+
+  if (lat !== '_') {
+    parameters = `lat=${lat}&lon=${lng}`;
+  } else if (cityZip !== '_') {
+    parameters = `q=${cityZip},us`;
+  }
+
+  // const numLat = Number(lat);
+  // const numLng = Number(lng);
   // console.log(numLat, numLng, typeof numLat);
   
   //extra error validation on the back-end for protection
-  if(numLat < -90 || numLat > 90 ){
-    return res.status(422).json({
-      code: 422,
-      reason: 'ValidationError',
-      message: 'Lattitude out of bounds.'
-    });
-  } 
+  // if(numLat < -90 || numLat > 90 ){
+  //   return res.status(422).json({
+  //     code: 422,
+  //     reason: 'ValidationError',
+  //     message: 'Lattitude out of bounds.'
+  //   });
+  // } 
 
-  if(numLng < -180 || numLng > 180 ){
-    return res.status(422).json({
-      code: 422,
-      reason: 'ValidationError',
-      message: 'Longitude out of bounds.'
-    });
-  } 
+  // if(numLng < -180 || numLng > 180 ){
+  //   return res.status(422).json({
+  //     code: 422,
+  //     reason: 'ValidationError',
+  //     message: 'Longitude out of bounds.'
+  //   });
+  // } 
 
   // console.log(typeof lat);
   const weatherUrl = 'http://api.openweathermap.org/data/2.5/weather'+
-  `?lat=${lat}&lon=${lng}&APPID=${WEATHER_API_KEY}`;
+  `?${parameters}&APPID=${WEATHER_API_KEY}`;
   // console.log(lat, lng, WEATHER_API_KEY);
   return fetch(weatherUrl, {
     method: 'GET',
@@ -44,6 +52,14 @@ router.get('/:lat/:lng', (req, res, next) => {
   })
     .then(result => {
       return result.json();
+    })
+    .then(result =>{
+      if(result.cod !== 200){
+        const err = new Error('Invalid city or zip-code. Please try again');
+        err.status = 404;
+        return next(err);
+      }
+      return result;
     })
     .then(result => {
       const weatherId = result.weather[0].id;
