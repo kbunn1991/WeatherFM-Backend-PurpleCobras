@@ -1,4 +1,4 @@
-'use strict';
+
 const express = require('express');
 const passport = require('passport');
 const fetch = require('node-fetch');
@@ -88,13 +88,19 @@ router.get('/:weather', jwtAuth, (req, res, next) => {
 });
 
 //POST ENDPOINT FOR SLIDER
-
 router.post('/', jwtAuth, (req, res, next) => {
-  const { danceability, energy, popularity, valence, acousticness, loudness, songId1, songId2, songId3 } = req.body;
+  const { 
+    danceability, energy, 
+    popularity, valence, 
+    acousticness, loudness, 
+    songId1, songId2, 
+    songId3 } = req.body;
   // console.log(req.body);
 
-  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + `seed_tracks=${songId1},${songId2},${songId3},` +
-    `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100` +
+  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + 
+  `seed_tracks=${songId1},${songId2},${songId3},` +
+  `&min_popularity=${popularity}&target_energy=${energy}&` +
+  `target_danceability=${danceability}&target_valence=${valence}&limit=100` +
     `&target_loudness${loudness}&target_acousticness${acousticness}`;
 
   // console.log(weather, SPOTIFY_KEY_64);
@@ -173,9 +179,7 @@ router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
         }
       })
         .then(response => {
-          // console.log(response.body);
-          response = response.json();
-          return response;
+          return response.json();
         }).then(response => {
           let averageObj = {
             danceability: [],
@@ -186,7 +190,7 @@ router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
           };
           // console.log(response);
           if (response.audio_features !== []) {
-            console.log(response.audio_features);
+            // console.log(response.audio_features);
             response.audio_features.forEach(item => {
               if (item) {
                 averageObj.danceability.push(item.danceability);

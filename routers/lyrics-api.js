@@ -1,4 +1,4 @@
-'use strict';
+
 const express = require('express');
 const fetch = require('node-fetch');
 const passport = require('passport');
@@ -32,8 +32,6 @@ router.get('/:artist/:title', (req, res, next) => {
       }
     })
     .then(data => {
-      //console.log(data, '');
-      // const lyrics =data.result.track.text;
       res.json(data);
     })
     .catch(err => {
