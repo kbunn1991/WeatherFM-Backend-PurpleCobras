@@ -50,10 +50,11 @@ router.put('/', jwtAuth, (req, res, next) => {
           return response.json();
         })
         .then(response => {
+          console.log(response, '!!!!!!!!!!!!!!!!!!!!!!!');
           if(!response.tracks.items.length){
-            resolve(
-              `Invalid song: ${item.songTitle} by ${item.artist}.`
-              +'Please try again.');
+            return({ 
+              message: `Invalid song: ${item.songTitle} by ${item.artist}.`
+              +'Please try again.'});
           }
           // console.log(response.tracks.items, 'spotify response');
           else{
@@ -116,13 +117,22 @@ router.put('/', jwtAuth, (req, res, next) => {
       }
     })
     .then(result => {
+      const allGood = result.every(playlist => {
+        return playlist.every(track => {
+          return !track.message;
+        });
+      });
+      console.log(allGood,'---------------------------------------------');
+        
+      // console.log(result, '---------------------');
       userData.playlists.Sunny.push(...result[0]);
       userData.playlists.Rainy.push(...result[1]);
       userData.playlists.Drizzle.push(...result[2]);
       userData.playlists.Snowy.push(...result[3]);
       userData.playlists.Cloudy.push(...result[4]);
       userData.playlists.Thunderstorm.push(...result[5]);
-      userData.save();
+      // console.log(userData.playlists, 'userData.playlists***************');
+      // userData.save();
     })
     .then(() => {
       return res.status(200).json('OK');
