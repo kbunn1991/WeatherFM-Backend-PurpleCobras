@@ -176,7 +176,7 @@ describe('WeatherFM API - Users', function () {
           .then((res) => {
             expect(res).to.have.status(422);
             expect(res.body.message).to.equal(
-              'Username already taken'
+              'Username already taken.'
             );
           });
       });
