@@ -205,7 +205,7 @@ router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
             averageObj.loudness = arrayAverage(averageObj.loudness);
             averageObj.acousticness = arrayAverage(averageObj.acousticness);
             averageObj.valence = arrayAverage(averageObj.valence);
-            console.log(averageObj);
+            // console.log(averageObj);
             return res.json(averageObj);
           } else if (response.tracks === []) {
             return res.status(423);

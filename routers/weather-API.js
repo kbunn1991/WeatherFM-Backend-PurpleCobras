@@ -67,7 +67,7 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
       // console.log(tempK, typeof tempK);
       let tempC = (tempK - 273.15).toFixed(0);
       let tempF = ((tempC * 1.8) + 32.00).toFixed(0);
-      console.log(tempC, tempF, result.weather);
+      // console.log(tempC, tempF, result.weather);
 
       if(weatherId === 800)
         return res.json({weather: 'Sunny', tempC, tempF});

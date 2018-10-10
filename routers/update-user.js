@@ -50,15 +50,25 @@ router.put('/', jwtAuth, (req, res, next) => {
           return response.json();
         })
         .then(response => {
-          // console.log(response, 'spotify response');
-          if(response.tracks.items[0]){
-            return ({
-              spotifyId: response.tracks.items[0].id,
-              artist: response.tracks.items[0].artists[0].name,
-              songTitle: response.tracks.items[0].name,
-              thumbnail: response.tracks.items[0].album.images[0].url           
-            });
+          if(!response.tracks.items.length){
+            resolve(
+              `Invalid song: ${item.songTitle} by ${item.artist}.`
+              +'Please try again.');
           }
+          // console.log(response.tracks.items, 'spotify response');
+          else{
+            if(response.tracks.items[0]){
+              return ({
+                spotifyId: response.tracks.items[0].id,
+                artist: response.tracks.items[0].artists[0].name,
+                songTitle: response.tracks.items[0].name,
+                thumbnail: response.tracks.items[0].album.images[0].url           
+              });
+            }
+          }
+        })
+        .catch(err => {
+          next(err);
         });
     });
     Promise.all(promises)
