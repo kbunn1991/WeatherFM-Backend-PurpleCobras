@@ -19,26 +19,26 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
     parameters = `q=${cityZip},us`;
   }
 
-  // const numLat = Number(lat);
-  // const numLng = Number(lng);
+  const numLat = Number(lat);
+  const numLng = Number(lng);
   // console.log(numLat, numLng, typeof numLat);
   
   //extra error validation on the back-end for protection
-  // if(numLat < -90 || numLat > 90 ){
-  //   return res.status(422).json({
-  //     code: 422,
-  //     reason: 'ValidationError',
-  //     message: 'Lattitude out of bounds.'
-  //   });
-  // } 
+  if(numLat < -90 || numLat > 90 ){
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: 'Lattitude out of bounds.'
+    });
+  } 
 
-  // if(numLng < -180 || numLng > 180 ){
-  //   return res.status(422).json({
-  //     code: 422,
-  //     reason: 'ValidationError',
-  //     message: 'Longitude out of bounds.'
-  //   });
-  // } 
+  if(numLng < -180 || numLng > 180 ){
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: 'Longitude out of bounds.'
+    });
+  } 
 
   // console.log(typeof lat);
   const weatherUrl = 'http://api.openweathermap.org/data/2.5/weather'+
@@ -70,31 +70,24 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
       console.log(tempC, tempF, result.weather);
 
       if(weatherId === 800)
-        // return res.json('Sunny');
         return res.json({weather: 'Sunny', tempC, tempF});
 
-      else if(weatherId >= 200 && weatherId <= 232) 
-        // return res.json('Thunderstorm');
+      else if(weatherId >= 200 && weatherId <= 232)
         return res.json({weather: 'Thunderstorm', tempC, tempF});
 
       else if(weatherId >= 300 && weatherId <= 321)
-        // return res.json('Drizzle');
         return res.json({weather: 'Drizzle', tempC, tempF});
 
       else if(weatherId >= 500 && weatherId <= 531)
-        // return res.json('Rainy');
         return res.json({weather: 'Rainy', tempC, tempF});
 
       else if(weatherId >= 600 && weatherId <= 622)
-        // return res.json('Snowy');
         return res.json({weather: 'Snowy', tempC, tempF});
 
       else if(weatherId >= 701 && weatherId <= 781)
-        // return res.json('Cloudy');
         return res.json({weather: 'Cloudy', tempC, tempF});
 
       else if(weatherId >= 800 && weatherId <= 804)
-        // return res.json('Cloudy');
         return res.json({weather: 'Cloudy', tempC, tempF});
 
     })
