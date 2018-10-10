@@ -1,3 +1,4 @@
+'use strict';
 
 const express = require('express');
 const cors = require('cors');
@@ -36,6 +37,9 @@ app.use(
     origin: CLIENT_ORIGIN
   })
 );
+
+//wake-up
+app.get('/api/wake-up', (req, res) => res.send('👍'));
 
 //routers
 app.use('/api/users/', usersRouter);
