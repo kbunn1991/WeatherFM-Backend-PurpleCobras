@@ -34,15 +34,16 @@ router.put('/', jwtAuth, (req, res, next) => {
     .then(result => {
       // console.log(result);
       if (result) {
-        let duplicate = result.playlists[weather].filter(
-          song => song.songTitle === songObj.songTitle && song.artist === songObj.artist);
+        // console.log(songObj);
+        // console.log(result.playlists[weather])
+        let duplicate = result.playlists[weather].filter(song => song.songTitle === songObj.songTitle && song.artist === songObj.artist);
+        // console.log(duplicate)
         if (duplicate.length) {
-          res.status(422).end(); 
-        } 
-        else {
+          // console.log("HEEEEYYYY")
+          res.status(422).end();
+        } else {
           result.playlists[weather].push(songObj);
           result.save();
-
           res.json(result);
         }
       }

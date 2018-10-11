@@ -5,15 +5,8 @@ const fetch = require('node-fetch');
 const { SPOTIFY_KEY_64 } = require('../config');
 const shuffle = require('shuffle-array');
 const User = require('../db/models/userSchema');
+const arrayAverage = require('./helpers/arrayAverage');
 const router = express.Router();
-
-const arrayAverage = array => {
-  let sum = 0;
-  for (let i = 0; i < array.length; i++) {
-    sum += array[i];
-  }
-  return sum / array.length;
-};
 
 const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
@@ -22,7 +15,6 @@ const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: tr
 router.get('/:weather', jwtAuth, (req, res, next) => {
   const { weather } = req.params;
   const userId = req.user.id;
-
   let songList = [];
 
   return User.findById(userId)
@@ -47,8 +39,7 @@ router.get('/:weather', jwtAuth, (req, res, next) => {
         })
         .then(result => {
           const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?seed_tracks=' +
-            `${songList}` +
-            '&min_popularity=20&limit=100';
+            `${songList}` + '&min_popularity=20&limit=100';
           fetch(fetchSongUrl, {
             method: 'GET',
             headers: {
@@ -95,7 +86,6 @@ router.post('/', jwtAuth, (req, res, next) => {
     acousticness, loudness, 
     songId1, songId2, 
     songId3 } = req.body;
-  // console.log(req.body);
 
   const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + 
   `seed_tracks=${songId1},${songId2},${songId3},` +
@@ -103,7 +93,6 @@ router.post('/', jwtAuth, (req, res, next) => {
   `target_danceability=${danceability}&target_valence=${valence}&limit=100` +
     `&target_loudness${loudness}&target_acousticness${acousticness}`;
 
-  // console.log(weather, SPOTIFY_KEY_64);
   return fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {
@@ -116,8 +105,7 @@ router.post('/', jwtAuth, (req, res, next) => {
       return result.json();
     })
     .then(result => {
-      // console.log(result.access_token);
-      // console.log(fetchSongUrl);
+
       return fetch(fetchSongUrl, {
         method: 'GET',
         headers: {
@@ -154,10 +142,9 @@ router.post('/', jwtAuth, (req, res, next) => {
 
 router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
   const { songIds } = req.params;
-  // console.log('------------GETTING AVERAGES---------------', songIds);
 
   const fetchAverageUrl = `https://api.spotify.com/v1/audio-features?ids=${songIds}`;
-  // console.log(weather, SPOTIFY_KEY_64);
+
   return fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {

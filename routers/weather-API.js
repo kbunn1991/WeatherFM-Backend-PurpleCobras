@@ -21,7 +21,6 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
 
   const numLat = Number(lat);
   const numLng = Number(lng);
-  // console.log(numLat, numLng, typeof numLat);
   
   //extra error validation on the back-end for protection
   if(numLat < -90 || numLat > 90 ){
@@ -40,10 +39,9 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
     });
   } 
 
-  // console.log(typeof lat);
   const weatherUrl = 'http://api.openweathermap.org/data/2.5/weather'+
   `?${parameters}&APPID=${WEATHER_API_KEY}`;
-  // console.log(lat, lng, WEATHER_API_KEY);
+
   return fetch(weatherUrl, {
     method: 'GET',
     headers: {
@@ -64,15 +62,13 @@ router.get('/:lat/:lng/:cityZip', (req, res, next) => {
     .then(result => {
       const weatherId = result.weather[0].id;
       let tempK = result.main.temp;
-      // console.log(tempK, typeof tempK);
       let tempC = (tempK - 273.15).toFixed(0);
       let tempF = ((tempC * 1.8) + 32.00).toFixed(0);
-      // console.log(tempC, tempF, result.weather);
 
       if(weatherId === 800)
         return res.json({weather: 'Sunny', tempC, tempF});
 
-      else if(weatherId >= 200 && weatherId <= 232)
+      else if(weatherId >= 200 && weatherId <= 232) 
         return res.json({weather: 'Thunderstorm', tempC, tempF});
 
       else if(weatherId >= 300 && weatherId <= 321)

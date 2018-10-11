@@ -1,4 +1,4 @@
-'use strict';
+
 const express = require('express');
 const fetch = require('node-fetch');
 const passport = require('passport');
@@ -8,20 +8,12 @@ const router = express.Router();
 
 const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
-router.get('/:artist/:songTitle/:mode', jwtAuth, (req, res, next) => {
+router.get('/:artist/:songTitle', jwtAuth, (req, res, next) => {
   let artist = req.params.artist.replace(/[&]/g, '%20');
   let songTitle = req.params.songTitle.replace(/[&]/g, '%20');
-  let {mode} = req.params;
-  let youtubeUrl ='';
-  if (mode === 'video'){
-    youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
-  `?key=${YOUTUBE_API_KEY}&q=${artist}+${songTitle}&part=snippet&maxResults=1&type=video`;
-  }
-  else if (mode === 'karaoke'){
-    youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
+  let youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
   `?key=${YOUTUBE_API_KEY}&q=${artist}+${songTitle}+lyrics&part=snippet&maxResults=1&type=video`;
-  }
-
+  
   // console.log(YOUTUBE_API_KEY)
   return fetch(youtubeUrl, {
     method: 'GET',
