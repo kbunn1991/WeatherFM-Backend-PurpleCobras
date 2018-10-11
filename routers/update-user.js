@@ -26,7 +26,7 @@ const getSongFromSpotify = function (arr, resolve, accessToken){
         return response.json();
       })
       .then(response => {
-        console.log(response, '!!!!!!!!!!!!!!!!!!!!!!!');
+        // console.log(response, '!!!!!!!!!!!!!!!!!!!!!!!');
         if(!response.tracks.items.length){
           return({ 
             message: 'Invalid song.',
@@ -118,16 +118,14 @@ router.put('/', jwtAuth, (req, res, next) => {
     .then(result => {
       const arr = [];
       // console.log(result);
-      const allGood = result.map(playlist => {
+      result.map(playlist => {
         // console.log(playlist);
         return playlist.map(track => {
-          // console.log(track);
           if(track.message) arr.push(track);
         });
       });
       console.log(arr, '*******************');
       if(arr.length) return res.json(arr);
-      // console.log(allGood,'---------------------------------------------');
       else{  
       // console.log(result, '---------------------');
         userData.playlists.Sunny = result[0];
