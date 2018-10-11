@@ -14,7 +14,6 @@ router.get('/:artist/:songTitle', jwtAuth, (req, res, next) => {
   let youtubeUrl = 'https://www.googleapis.com/youtube/v3/search'+
   `?key=${YOUTUBE_API_KEY}&q=${artist}+${songTitle}+lyrics&part=snippet&maxResults=1&type=video`;
   
-
   // console.log(YOUTUBE_API_KEY)
   return fetch(youtubeUrl, {
     method: 'GET',
