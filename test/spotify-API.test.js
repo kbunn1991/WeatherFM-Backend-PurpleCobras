@@ -61,7 +61,7 @@ describe('WeatherFM API - spotify API', function () {
         songId2: '0Z7S8ity4SYlkzbJpejd1v',
         songId3: '6wmzz9dCztW1zgNXrZIyw8',
       };
-      return chai.request(app).post(`/api/users/rec`).set('Authorization', `Bearer ${token}`).send(averageObj)
+      return chai.request(app).post('/api/users/rec').set('Authorization', `Bearer ${token}`).send(averageObj)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;

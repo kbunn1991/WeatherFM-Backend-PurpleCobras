@@ -11,7 +11,6 @@ const expect = chai.expect;
 describe('WeatherFM API - Users', function () {
   const username = 'exampleUser';
   const password = 'examplePass';
-  const lastName = 'User';
 
   before(function () {
     return mongoose.connect(TEST_DATABASE_URL)
