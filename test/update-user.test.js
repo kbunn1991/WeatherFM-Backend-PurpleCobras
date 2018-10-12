@@ -44,11 +44,11 @@ describe('WeatherFM API - update user API', function () {
         Cloudy: [],
         Thunderstorm: []
       };
-      return chai.request(app).put(`/api/users/`).set('Authorization', `Bearer ${token}`).send(defaultSongObj)
+      return chai.request(app).put('/api/users/').set('Authorization', `Bearer ${token}`).send(defaultSongObj)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body).to.equal('OK')
+          expect(res.body).to.equal('OK');
         });
     });
     it('it should update user with default seed songs that they added', function () {
@@ -60,33 +60,12 @@ describe('WeatherFM API - update user API', function () {
         Cloudy: [],
         Thunderstorm: []
       };
-      return chai.request(app).put(`/api/users/`).set('Authorization', `Bearer ${token}`).send(songObj)
+      return chai.request(app).put('/api/users/').set('Authorization', `Bearer ${token}`).send(songObj)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body).to.equal('OK')
+          expect(res.body).to.equal('OK');
         });
     });
-    // it('it should update user and user should have correct default songs', function () {
-    //   const songObj = {
-    //     Sunny: [{ artist: 'smash mouth', songTitle: 'all star' }],
-    //     Rainy: [{ songTitle: 'harvest moon', artist: 'neil young' }],
-    //     Drizzle: [],
-    //     Snowy: [],
-    //     Cloudy: [],
-    //     Thunderstorm: []
-    //   };
-    //   return chai.request(app).put(`/api/users/`).set('Authorization', `Bearer ${token}`).send(songObj)
-    //     .then((res) => {
-    //       expect(res).to.have.status(200);
-    //       expect(res).to.be.json;
-    //       expect(res.body).to.equal('OK')
-    //       return chai.request(app).get('/api/users/playlists').set('Authorization', `Bearer ${token}`)
-    //     })
-    //     .then((res) => {
-    //       expect(res).to.have.status(200)
-    //       console.log(res.body)
-    //     })
-    // });
   });
 });

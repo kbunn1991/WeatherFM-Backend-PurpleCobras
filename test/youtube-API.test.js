@@ -34,7 +34,7 @@ describe('WeatherFM API - youtube API', function () {
     return mongoose.disconnect();
   });
 
-  describe('GET /api/users/youtube/:artist/:song/:mode', function () {
+  describe('GET /api/users/youtube/:artist/:song', function () {
     //think theres some issue with the code on backend because its returning the
     //entire user instead of just the youtube url
 
@@ -44,13 +44,13 @@ describe('WeatherFM API - youtube API', function () {
       const songTitle = 'purple+rain';
       const mode = 'video';
       return Promise.all([
-        chai.request(app).get(`/api/users/youtube/${artist}/${songTitle}/${mode}`).set('Authorization', `Bearer ${token}`)
+        chai.request(app).get(`/api/users/youtube/${artist}/${songTitle}`).set('Authorization', `Bearer ${token}`)
       ])
         .then(([res]) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
-          expect(res.body).to.have.keys(['videoTitle', 'videoURL'])
+          expect(res.body).to.have.keys(['videoTitle', 'videoURL']);
         });
     });
   });

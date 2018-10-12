@@ -101,28 +101,17 @@ describe('WeatherFM API - Playlists', function () {
       return User.findOne()
         .then(_data => {
           data = _data;
-          return chai.request(app).get('/api/users/playlists').set('Authorization', `Bearer ${token}`)
+          return chai.request(app).get('/api/users/playlists').set('Authorization', `Bearer ${token}`);
         })
         .then((res) => {
-          song = res.body["Sunny"][0];
-          song.weather = "Sunny";
+          song = res.body['Sunny'][0];
+          song.weather = 'Sunny';
           return chai.request(app).put('/api/users/playlists').set('Authorization', `Bearer ${token}`).send(song);
         })
         .then((res) => {
           expect(res).to.have.status(422);
-        })
+        });
     });
-    // it('should return an error when missing "name" field', function () {
-    //   const updateItem = {};
-    //   return chai.request(app).put(`/api/users/playlists`).set('Authorization', `Bearer ${token}`).send(updateItem)
-    //     .then(res => {
-    //       expect(res).to.have.status(422);
-    //       expect(res).to.be.json;
-    //       expect(res.body).to.be.a('object');
-    //       expect(res.body.message).to.equal('Missing weather or song info in request body');
-    //     });
-    // });
-
   });
 
   describe('DELETE /api/users/playlists', function () {
