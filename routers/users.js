@@ -1,4 +1,4 @@
-'use strict';
+
 const express = require('express');
 const fetch = require('node-fetch');
 const {SPOTIFY_KEY_64} = require('../config');
@@ -22,7 +22,7 @@ router.post('/', (req, res, next) => {
     });
   }
 
-  const stringFields = ['username', 'password', 'firstName'];
+  const stringFields = ['username', 'password'];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -94,12 +94,10 @@ router.post('/', (req, res, next) => {
 
   let {
     username, 
-    password, 
-    firstName = ''} = req.body;
+    password} = req.body;
 
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
-  firstName = firstName.trim();
 
   User.find({username})
     .count()
@@ -109,7 +107,7 @@ router.post('/', (req, res, next) => {
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
-          message: 'Username already taken',
+          message: 'Username already taken.',
           location: 'username'
         });
       }
@@ -120,7 +118,6 @@ router.post('/', (req, res, next) => {
       return User.create({
         username,
         password: hash,
-        firstName,
         playlists: {
           Sunny: [],
           Rainy: [],

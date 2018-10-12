@@ -11,7 +11,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: tr
 //---------get all playlists for one specific user
 router.get('/', jwtAuth, (req, res, next) => {
   const userId = req.user.id;
-  console.log(userId);
+  // console.log(userId);
   return User.findById(userId)
     .then(users => {
       res.json(users.playlists);
@@ -22,35 +22,31 @@ router.get('/', jwtAuth, (req, res, next) => {
 });
 
 //-------- add a song to a playlist
-<<<<<<< HEAD
-router.put('/', (req, res, next) => {
-  console.log(req.body);
-=======
 router.put('/', jwtAuth, (req, res, next) => {
->>>>>>> fa3d155af047c82244d33ec454d38ce34520b42d
   const {weather} = req.body;
   const {spotifyId, artist, songTitle, thumbnail} = req.body;
   const songObj = {spotifyId, artist, songTitle, thumbnail};
+
   // console.log(weather);
   // console.log(songObj, '---');
   const userId = req.user.id;
-  // if (!weather || !artist || !songTitle) {
-  //   return res.status(422).json({
-  //     code: 422,
-  //     reason: 'ValidationError',
-  //     message: `Missing weather or song info in request body`,
-  //   });
-  // }
 
   return User.findById(userId)
     .then(result => {
       // console.log(result);
-      if(result){
-        // console.log(songObj);
-        result.playlists[weather].push(songObj);
+      if (result) {
+        let duplicate = result.playlists[weather].filter(
+          song => song.songTitle === songObj.songTitle && song.artist === songObj.artist);
+        if (duplicate.length) {
+          res.status(422).end(); 
+        } 
+        else {
+          result.playlists[weather].push(songObj);
+          result.save();
+
+          res.json(result);
+        }
       }
-      result.save();
-      res.json(result);
     })
     .catch(err => {
       next(err);
@@ -59,12 +55,12 @@ router.put('/', jwtAuth, (req, res, next) => {
 
 //--------remove a song from a playlist
 router.delete('/:weather/:songTitle', jwtAuth, (req, res, next) => {
-  const {weather, songTitle} = req.params;
+  const { weather, songTitle } = req.params;
   // console.log(weather);
   const userId = req.user.id;
   return User.findById(userId)
     .then(result => {
-      if(result){
+      if (result) {
         let newResults = result.playlists[weather]
           .filter(song => song.songTitle !== songTitle);
         // console.log(newResults)
@@ -79,4 +75,4 @@ router.delete('/:weather/:songTitle', jwtAuth, (req, res, next) => {
     });
 });
 
-module.exports = {router};
+module.exports = { router };

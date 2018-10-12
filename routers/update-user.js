@@ -1,10 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const passport = require('passport');
 const {SPOTIFY_KEY_64} = require('../config');
 const songData = require('../db/data/data');
-
 const User = require('../db/models/userSchema');
 
 const router = express.Router();
@@ -37,8 +35,9 @@ router.put('/', jwtAuth, (req, res, next) => {
 
   const getSongFromSpotify = function (arr, resolve, accessToken){
     const promises = arr.map(item => {
-      console.log(item);
-      let songDetails = `https://api.spotify.com/v1/search?type=track&limit=1&q=${item.songTitle}+${item.artist}`;
+      // console.log(item);
+      let songDetails = 'https://api.spotify.com/v1/search?type=track' + 
+      `&limit=1&q=${item.songTitle}+${item.artist}`;
       // console.log(songDetails, '-----------------');
       return fetch(songDetails, 
         {
@@ -71,7 +70,6 @@ router.put('/', jwtAuth, (req, res, next) => {
   return User.findById(userId)
     .then(response => {
       userData = response;
-      // console.log(response);
       //
       //getting token
       //
@@ -91,6 +89,8 @@ router.put('/', jwtAuth, (req, res, next) => {
             const promises = weatherArr.map(item => {
               return new Promise((resolve, reject) => {
                 const arr = Object.values(item)[0];
+                // changed arr.length to arr
+                // console.log(arr)
                 if(arr.length){
                   getSongFromSpotify(arr, resolve, result.access_token);
                 }
@@ -106,8 +106,6 @@ router.put('/', jwtAuth, (req, res, next) => {
       }
     })
     .then(result => {
-      // console.log(result[0], '---------------');
-      // console.log(userData.playlists);
       userData.playlists.Sunny.push(...result[0]);
       userData.playlists.Rainy.push(...result[1]);
       userData.playlists.Drizzle.push(...result[2]);
@@ -115,20 +113,6 @@ router.put('/', jwtAuth, (req, res, next) => {
       userData.playlists.Cloudy.push(...result[4]);
       userData.playlists.Thunderstorm.push(...result[5]);
       userData.save();
-      // User.findById(userId)
-      //   .then(response => {
-      //   });
-      // console.log(result, '111111111111111');
-      // return User.create({
-      //   playlists: {
-      //     Sunny: result[0],
-      //     Rainy: result[1],
-      //     Drizzle: result[2],
-      //     Snowy : result[3],
-      //     Cloudy : result[4],
-      //     Thunderstorm : result[5]
-      //   }
-      // });
     })
     .then(() => {
       return res.status(200).json('OK');

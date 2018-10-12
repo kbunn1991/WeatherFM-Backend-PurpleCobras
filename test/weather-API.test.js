@@ -1,14 +1,9 @@
-
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
 const app = require('../server');
-
 const User = require('../db/models/userSchema');
 const seedUsers = require('../db/seed/users');
-
 const { TEST_DATABASE_URL, JWT_SECRET } = require('../config');
 const jwt = require('jsonwebtoken');
 
@@ -40,14 +35,16 @@ describe('WeatherFM API - weather API', function () {
   });
 
   describe('GET /api/users/weather/:lat/:lng', function () {
-    it('should return the proper weather string', function () {
+    it('should return an object with weather and two temps', function () {
       const lat = 44;
       const lng = 121;
-      return chai.request(app).get(`/api/users/weather/${lat}/${lng}`).set('Authorization', `Bearer ${token}`)
+      const cityZip = '_';
+      return chai.request(app).get(`/api/users/weather/${lat}/${lng}/${cityZip}`).set('Authorization', `Bearer ${token}`)
         .then((res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body).to.be.a('string');
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.have.keys(['weather', 'tempC', 'tempF']);
         });
     });
   });

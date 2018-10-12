@@ -1,4 +1,4 @@
-'use strict';
+
 const express = require('express');
 const passport = require('passport');
 const fetch = require('node-fetch');
@@ -88,14 +88,19 @@ router.get('/:weather', jwtAuth, (req, res, next) => {
 });
 
 //POST ENDPOINT FOR SLIDER
-
 router.post('/', jwtAuth, (req, res, next) => {
-  const { danceability, energy, popularity, valence, acousticness, loudness, songId1, songId2, songId3 } = req.body;
-  console.log('~~~~~~~~~~~HITTTTTING SLIDER ENDPOINT--------------');
-  console.log(req.body);
+  const { 
+    danceability, energy, 
+    popularity, valence, 
+    acousticness, loudness, 
+    songId1, songId2, 
+    songId3 } = req.body;
+  // console.log(req.body);
 
-  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + `seed_tracks=${songId1},${songId2},${songId3},` +
-    `&min_popularity=${popularity}&target_energy=${energy}&target_danceability=${danceability}&target_valence=${valence}&limit=100` +
+  const fetchSongUrl = 'https://api.spotify.com/v1/recommendations?' + 
+  `seed_tracks=${songId1},${songId2},${songId3},` +
+  `&min_popularity=${popularity}&target_energy=${energy}&` +
+  `target_danceability=${danceability}&target_valence=${valence}&limit=100` +
     `&target_loudness${loudness}&target_acousticness${acousticness}`;
 
   // console.log(weather, SPOTIFY_KEY_64);
@@ -111,8 +116,8 @@ router.post('/', jwtAuth, (req, res, next) => {
       return result.json();
     })
     .then(result => {
-      console.log(result.access_token);
-      console.log(fetchSongUrl);
+      // console.log(result.access_token);
+      // console.log(fetchSongUrl);
       return fetch(fetchSongUrl, {
         method: 'GET',
         headers: {
@@ -124,10 +129,11 @@ router.post('/', jwtAuth, (req, res, next) => {
         })
         .then(response => {
           const songArr = [];
-          console.log(response);
+          // console.log(response);
           if (response.tracks !== []) {
             response.tracks.map(item => {
               songArr.push({
+                spotifyId: item.id,
                 artist: item.artists[0].name,
                 songTitle: item.name,
                 thumbnail: item.album.images[0].url
@@ -151,7 +157,6 @@ router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
   // console.log('------------GETTING AVERAGES---------------', songIds);
 
   const fetchAverageUrl = `https://api.spotify.com/v1/audio-features?ids=${songIds}`;
-
   // console.log(weather, SPOTIFY_KEY_64);
   return fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
@@ -174,9 +179,7 @@ router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
         }
       })
         .then(response => {
-          // console.log(response.body);
-          response = response.json();
-          return response;
+          return response.json();
         }).then(response => {
           let averageObj = {
             danceability: [],
@@ -187,7 +190,7 @@ router.get('/averages/:songIds', jwtAuth, (req, res, next) => {
           };
           // console.log(response);
           if (response.audio_features !== []) {
-            console.log(response.audio_features);
+            // console.log(response.audio_features);
             response.audio_features.forEach(item => {
               if (item) {
                 averageObj.danceability.push(item.danceability);

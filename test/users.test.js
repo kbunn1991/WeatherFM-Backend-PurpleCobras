@@ -1,9 +1,6 @@
-
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
 const app = require('../server');
 const User = require('../db/models/userSchema');
 const { TEST_DATABASE_URL } = require('../config');
@@ -14,7 +11,6 @@ const expect = chai.expect;
 describe('WeatherFM API - Users', function () {
   const username = 'exampleUser';
   const password = 'examplePass';
-  const firstName = 'Example';
   const lastName = 'User';
 
   before(function () {
@@ -41,8 +37,6 @@ describe('WeatherFM API - Users', function () {
           .post('/api/users')
           .send({
             password,
-            firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -55,8 +49,6 @@ describe('WeatherFM API - Users', function () {
           .post('/api/users')
           .send({
             username,
-            firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -70,8 +62,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username: 1234,
             password,
-            firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -87,8 +77,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username,
             password: 1234,
-            firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -104,8 +92,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username: ` ${username} `,
             password,
-            firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -121,8 +107,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username,
             password: ` ${password} `,
-            firstName,
-            // lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -138,8 +122,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username: '',
             password,
-            firstName,
-            lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -155,8 +137,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username,
             password: '12345',
-            firstName,
-            lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -172,8 +152,6 @@ describe('WeatherFM API - Users', function () {
           .send({
             username,
             password: new Array(73).fill('a').join(''),
-            firstName,
-            lastName
           })
           .then((res) => {
             expect(res).to.have.status(422);
@@ -187,22 +165,18 @@ describe('WeatherFM API - Users', function () {
         return User.create({
           username,
           password,
-          firstName,
-          lastName
         })
           .then(() =>
             // Try to create a second user with the same username
             chai.request(app).post('/api/users').send({
               username,
               password,
-              firstName,
-              lastName
             })
           )
           .then((res) => {
             expect(res).to.have.status(422);
             expect(res.body.message).to.equal(
-              'Username already taken'
+              'Username already taken.'
             );
           });
       });
@@ -213,66 +187,57 @@ describe('WeatherFM API - Users', function () {
           .send({
             username,
             password,
-            firstName,
           })
           .then(res => {
             expect(res).to.have.status(201);
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.keys(
               'username',
-              'firstName',
               'createdAt',
               'updatedAt',
               'id',
               'playlists'
             );
             expect(res.body.username).to.equal(username);
-            expect(res.body.firstName).to.equal(firstName);
             return User.findOne({
               username
             });
           })
           .then(user => {
             expect(user).to.not.be.null;
-            expect(user.firstName).to.equal(firstName);
             return user.validatePassword(password);
           })
           .then(passwordIsCorrect => {
             expect(passwordIsCorrect).to.be.true;
           });
       });
-      it('Should trim firstName', function () {
-        return chai
-          .request(app)
-          .post('/api/users')
-          .send({
-            username,
-            password,
-            firstName: ` ${firstName} `,
-            lastName
-          })
-          .then(res => {
-            expect(res).to.have.status(201);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.keys(
-              'username',
-              'firstName',
-              'createdAt',
-              'updatedAt',
-              'playlists',
-              'id'
-            );
-            expect(res.body.username).to.equal(username);
-            expect(res.body.firstName).to.equal(firstName);
-            return User.findOne({
-              username
-            });
-          })
-          .then(user => {
-            expect(user).to.not.be.null;
-            expect(user.firstName).to.equal(firstName);
-          });
-      });
+      // it('Should trim firstName', function () {
+      //   return chai
+      //     .request(app)
+      //     .post('/api/users')
+      //     .send({
+      //       username,
+      //       password
+      //     })
+      //     .then(res => {
+      //       expect(res).to.have.status(201);
+      //       expect(res.body).to.be.an('object');
+      //       expect(res.body).to.have.keys(
+      //         'username',
+      //         'createdAt',
+      //         'updatedAt',
+      //         'playlists',
+      //         'id'
+      //       );
+      //       expect(res.body.username).to.equal(username);
+      //       return User.findOne({
+      //         username
+      //       });
+      //     })
+      //     .then(user => {
+      //       expect(user).to.not.be.null;
+      //     });
+      // });
     });
   });
 });

@@ -34,12 +34,12 @@ router.get('/:artist/:songTitle/:mode', jwtAuth, (req, res, next) => {
       return result;
     })
     .then(result => {
-      console.log(result.items[0].snippet.title);
+      // console.log(result.items[0].snippet.title);
       let videoTitle = result.items[0].snippet.title;
       let videoId = result.items[0].id.videoId;
       let videoURL = 'https://www.youtube.com/watch?v=' + videoId;
       let videoInfo = {videoTitle, videoURL};
-      console.log(videoInfo);
+      // console.log(videoInfo);
       return res.json(videoInfo);
     }) 
     .catch(err => {

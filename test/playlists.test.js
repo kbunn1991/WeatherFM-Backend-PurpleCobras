@@ -1,14 +1,9 @@
-
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
 const app = require('../server');
-
 const User = require('../db/models/userSchema');
 const seedUsers = require('../db/seed/users');
-
 const { TEST_DATABASE_URL, JWT_SECRET } = require('../config');
 const jwt = require('jsonwebtoken');
 
@@ -44,7 +39,6 @@ describe('WeatherFM API - Playlists', function () {
   });
 
   describe('GET /api/users/playlists', function () {
-
     it('should return all playlists for that user', function () {
       return Promise.all([
         User.find()
@@ -79,7 +73,6 @@ describe('WeatherFM API - Playlists', function () {
   });
 
   describe('PUT /api/users/playlists', function () {
-
     it('should add song to playlist', function () {
       const updateItem = { weather: 'Sunny', artist: 'prince', songTitle: 'purple rain', thumbnail: 'blahblah' };
       let data;
@@ -101,7 +94,24 @@ describe('WeatherFM API - Playlists', function () {
           expect(res.body.playlists.Sunny.length).to.greaterThan(data.playlists.Sunny.length);
         });
     });
-
+    it('should return error if add song to playlist thats already there', function () {
+      // const updateItem = { weather: 'Sunny', artist: 'prince', songTitle: 'purple rain', thumbnail: 'blahblah' };
+      let data;
+      let song;
+      return User.findOne()
+        .then(_data => {
+          data = _data;
+          return chai.request(app).get('/api/users/playlists').set('Authorization', `Bearer ${token}`)
+        })
+        .then((res) => {
+          song = res.body["Sunny"][0];
+          song.weather = "Sunny";
+          return chai.request(app).put('/api/users/playlists').set('Authorization', `Bearer ${token}`).send(song);
+        })
+        .then((res) => {
+          expect(res).to.have.status(422);
+        })
+    });
     // it('should return an error when missing "name" field', function () {
     //   const updateItem = {};
     //   return chai.request(app).put(`/api/users/playlists`).set('Authorization', `Bearer ${token}`).send(updateItem)
@@ -113,27 +123,9 @@ describe('WeatherFM API - Playlists', function () {
     //     });
     // });
 
-    // it('should return an error when given a duplicate name', function () {
-    //   return Folder.find({ userId: user.id }).limit(2)
-    //     .then(results => {
-    //       const [item1, item2] = results;
-    //       item1.name = item2.name;
-    //       return chai.request(app)
-    //         .put(`/api/folders/${item1.id}`).set('Authorization', `Bearer ${token}`)
-    //         .send(item1);
-    //     })
-    //     .then(res => {
-    //       expect(res).to.have.status(400);
-    //       expect(res).to.be.json;
-    //       expect(res.body).to.be.a('object');
-    //       expect(res.body.message).to.equal('Folder name already exists');
-    //     });
-    // });
-
   });
 
   describe('DELETE /api/users/playlists', function () {
-
     it('should delete a song and return the new playlists', function () {
       const weather= 'Sunny'; 
       const songTitle= 'Lovely Day';
