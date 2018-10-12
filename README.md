@@ -19,13 +19,19 @@ Regardless of a users location or the current weather, they can access all of th
 
 ## Screenshots
 ### Discover Page
+<img width="1270" alt="screen_shot_2018-10-12_at_3 14 22_pm" src="https://user-images.githubusercontent.com/38081935/46890019-51b3a780-ce1a-11e8-8ee2-7797e578654d.png">
 
 ### Playlist Page
+<img width="1261" alt="screen_shot_2018-10-12_at_3 14 34_pm" src="https://user-images.githubusercontent.com/38081935/46890001-45c7e580-ce1a-11e8-8706-e3c753f5b652.png">
 
-### Login
+### On-Boarding
+<img width="1268" alt="screen_shot_2018-10-12_at_3 15 12_pm" src="https://user-images.githubusercontent.com/38081935/46889970-321c7f00-ce1a-11e8-8426-0d8b5ee1a434.png">
 
+### Custom Discover Settings
+<img width="1222" alt="screen_shot_2018-10-12_at_3 14 13_pm" src="https://user-images.githubusercontent.com/38081935/46890036-5f692d00-ce1a-11e8-9d0d-688adc45e222.png">
 
 ### Registration
+<img width="1244" alt="screen_shot_2018-10-12_at_3 19 27_pm" src="https://user-images.githubusercontent.com/38081935/46889877-e538a880-ce19-11e8-9ec2-2bcc6681706b.png">
 
 
 ## Target Audience
