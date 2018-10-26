@@ -10,7 +10,7 @@ const options = {
 };
 
 const jwtStrategy = new JwtStrategy(options, (payload, done) => {
-  done(null, payload.user);
+  done(null, payload.user.username);
 });
 
 module.exports = jwtStrategy;
