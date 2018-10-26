@@ -18,7 +18,7 @@ const localAuth = passport.authenticate('local', {session: false});
 
 // The user provides a username and password to login
 router.post('/login', localAuth, (req, res) => {
-  const authToken = createAuthToken(req.user.id);
+  const authToken = createAuthToken(req.user);
   res.json({authToken});
 });
 
