@@ -15,18 +15,17 @@ WeatherFM uses React.js, Enzyme/Jest for the client, and Node.js, MongoDB, Mongo
 
 ##### Request a JSON Web Token 
 
-* Request Type: `POST`
+Request Type: `POST`
+URL: `https://weatherfm-client.herokuapp.com/api/login`
 
-* URL: `https://weatherfm-client.herokuapp.com/api/login`
-
-* Required Request Headers: 
+Required Request Headers: 
 ```
 {
   Content-Type: `application/json`
 }
 ```
 
-* Required Request JSON Body: 
+Required Request JSON Body: 
 ```
 {
   username: 'UsernameStringGoesHere',
@@ -34,7 +33,7 @@ WeatherFM uses React.js, Enzyme/Jest for the client, and Node.js, MongoDB, Mongo
 }
 ```
 
-* Response Body will be a JSON Web Token: 
+Response Body will be a JSON Web Token: 
 ```
 {
   authToken: 'theTokenWillBeHereAsAString'
@@ -42,6 +41,30 @@ WeatherFM uses React.js, Enzyme/Jest for the client, and Node.js, MongoDB, Mongo
 ```
 
 * Note - Web Token is valid for 7 days from the issue date
+
+##### Get Weather from Longitude and Latitude
+
+Request Type: `GET`
+Attach querie longituded and latitude to query string like this.
+
+URL: `https://weatherfm-client.herokuapp.com/api/users/weather/${latitude}/${longitude}`
+
+Required Request Headers: 
+```
+{
+  Authorization: `Bearer ${authToken}`,
+  content-type: `application/json`,
+}
+```
+
+Sample Response Body: 
+```
+{
+  weather: "Cloudy",
+  tempC: "16",
+  tempF: "61"
+}
+```
 
 ## Creators
 Kaitlin Bunn, Brandon Graham, Kevin Tsang, Filipp Gorbunov, Ian Beihl
