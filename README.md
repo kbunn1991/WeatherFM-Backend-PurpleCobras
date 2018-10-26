@@ -47,7 +47,7 @@ Response Body will be a JSON Web Token:
 ##### Get Weather from Longitude and Latitude
 
 Request Type: `GET`
-Attach querie longituded and latitude to query string like this.
+Attach querie longitude and latitude to query string like this.
 
 URL: `https://weatherfm-client.herokuapp.com/api/users/weather/${latitude}/${longitude}`
 
@@ -73,7 +73,6 @@ Sample Response Body:
 ##### Get Playlists for a User
 
 Request Type: `GET`
-Attach querie longituded and latitude to query string like this.
 
 URL: `https://weatherfm-client.herokuapp.com/api/users/playlists`
 
@@ -108,6 +107,46 @@ Sample Response Body:
   Snowy: [],
   Thunderstorm: [],
   Cloudy: []
+}
+```
+
+#### Discover Recommendations
+
+##### Get Discover Recomendations based on weather
+
+Request Type: `GET`
+Attach weather to end of query string, must be one of six weather strings:
+ "Sunny", "Cloudy", "Drizzle", "Thunderstorm", "Snowy", "Rainy"
+
+URL: `https://weatherfm-client.herokuapp.com/api/users/rec/${weather}`
+
+Required Request Headers: 
+```
+{
+  Authorization: `Bearer ${authToken}`,
+  content-type: `application/json`,
+}
+```
+The response body will contain an array of 100 song objects.  Each song object will in the song title, artist, its spotifyid and a thumbnail.
+
+Sample Response Body: 
+```
+{
+ [
+  {
+   artist: "The American Dollar",
+   songTitle: "Carousel",
+   spotifyId: "5bPRipuJHvPCrWY36HrGAT",
+   thumbnail: "https://i.scdn.co/image/3a95c7353340100416f10270126434f5b8d79852"
+  },
+  {
+   artist: "Casper",
+   songTitle: "230409",
+   spotifyId: "0e298tO6RF5fVPtzyMzofc",
+   thumbnail: "https://i.scdn.co/image/d8255c96b210e5cba8459a03b230e5b637ee048c"
+  }
+  ...
+ ]
 }
 ```
 
