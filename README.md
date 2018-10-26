@@ -110,6 +110,47 @@ Sample Response Body:
 }
 ```
 
+##### Add Song to User Playlist
+
+Request Type: `PUT`
+
+URL: `https://weatherfm-client.herokuapp.com/api/users/playlists`
+
+Required Request Headers: 
+```
+{
+  Authorization: `Bearer ${authToken}`,
+  content-type: `application/json`,
+}
+```
+Must include all song attributes as well as which weather playlist you would like to add it to.
+Required Body: 
+```
+{
+  weather: "Sunny,
+  artist: "Sickick",
+  songTitle: "Mind Games",
+  spotifyId: "21a1k8q3DJtsF8GorRfcL8",
+  thumbnail: "https://i.scdn.co/image/4051cd9fb90462627f6be1a0ea1360014290ef86",
+}
+```
+
+##### Remove Song From User Playlist
+
+Request Type: `DELETE`
+Weather string must be one of the following:
+ "Sunny", "Cloudy", "Drizzle", "Thunderstorm", "Snowy", "Rainy"
+ 
+URL: `https://weatherfm-client.herokuapp.com/api/users/playlists/${weather}/${songTitle}`
+
+Required Request Headers: 
+```
+{
+  Authorization: `Bearer ${authToken}`,
+  content-type: `application/json`,
+}
+```
+
 #### Discover Recommendations
 
 ##### Get Discover Recomendations based on weather
